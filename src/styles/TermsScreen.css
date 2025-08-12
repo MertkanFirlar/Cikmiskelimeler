@@ -1,0 +1,493 @@
+/* Terms Screen Styles */
+.terms-screen {
+  padding: 3rem 0;
+  background: #f9fafb;
+  min-height: 80vh;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #8b5cf6;
+  padding-bottom: 1rem;
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  color: #4b5563;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  background: #faf5ff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #8b5cf6;
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.content-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #8b5cf6;
+  padding-left: 1rem;
+}
+
+.content-section p {
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.content-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0;
+}
+
+.content-list li {
+  padding: 0.5rem 0;
+  color: #374151;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.content-list li::before {
+  content: '•';
+  color: #8b5cf6;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Terms Grid Components */
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.terms-item {
+  display: flex;
+  align-items: center;
+  background: #fef7ff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #f3e8ff;
+  transition: transform 0.2s ease;
+}
+
+.terms-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1);
+}
+
+.terms-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.terms-item h4 {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.terms-item p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Premium Info Styles */
+.premium-info {
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.premium-info h3 {
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.pricing-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pricing-list li {
+  padding: 0.5rem 0;
+  color: #374151;
+  font-weight: 500;
+}
+
+.refund-policy {
+  background: #fef2f2;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #f87171;
+  margin: 1.5rem 0;
+}
+
+.refund-policy h3 {
+  color: #dc2626;
+  margin-bottom: 0.75rem;
+}
+
+/* Responsibility Grid */
+.responsibility-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.responsibility-item {
+  text-align: center;
+  background: #f0fdf4;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #dcfce7;
+}
+
+.resp-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.responsibility-item h4 {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.responsibility-item p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Process List */
+.process-list {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.process-list li {
+  counter-increment: step-counter;
+  padding: 1rem;
+  margin: 0.75rem 0;
+  background: #f8fafc;
+  border-radius: 0.5rem;
+  border-left: 4px solid #3b82f6;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.process-list li::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #3b82f6;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.termination-note {
+  background: #fef2f2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fecaca;
+  margin: 1rem 0;
+}
+
+/* Disclaimer Grid */
+.disclaimer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.disclaimer-item {
+  background: #fffbeb;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #fed7aa;
+}
+
+.disclaimer-item h4 {
+  color: #92400e;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.disclaimer-item p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Update Notification */
+.update-notification {
+  display: flex;
+  align-items: flex-start;
+  background: #f0f9ff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #bae6fd;
+  margin: 1.5rem 0;
+}
+
+.update-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+}
+
+.update-notification h4 {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.update-notification ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.update-notification li {
+  color: #6b7280;
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.update-notification li::before {
+  content: '→';
+  color: #3b82f6;
+  position: absolute;
+  left: 0;
+}
+
+/* Contact Methods */
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.contact-method {
+  display: flex;
+  align-items: flex-start;
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.contact-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+}
+
+.contact-method h4 {
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.contact-method p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.contact-method a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.contact-method a:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Service Grid */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.service-item {
+  text-align: center;
+  background: #f1f5f9;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.service-item h4 {
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.service-item p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Final Section */
+.final-section {
+  border-top: 2px solid #e5e7eb;
+  padding-top: 2rem;
+}
+
+.acceptance-notice {
+  display: flex;
+  align-items: flex-start;
+  background: #f0fdf4;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #bbf7d0;
+  margin: 2rem 0;
+}
+
+.notice-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+}
+
+.acceptance-notice h4 {
+  color: #166534;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.acceptance-notice p {
+  color: #374151;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .terms-screen {
+    padding: 2rem 0;
+  }
+  
+  .content {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .terms-grid,
+  .responsibility-grid,
+  .disclaimer-grid,
+  .contact-methods,
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .terms-item,
+  .contact-method,
+  .update-notification,
+  .acceptance-notice {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .terms-icon,
+  .contact-icon,
+  .update-icon,
+  .notice-icon {
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .page-title {
+    font-size: 1.75rem;
+  }
+  
+  .intro-text {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  
+  .process-list li {
+    padding-left: 2.5rem;
+  }
+  
+  .process-list li::before {
+    left: 0.75rem;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
+  }
+}
