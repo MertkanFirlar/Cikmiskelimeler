@@ -4,6 +4,16 @@ import '../styles/HomeScreen.css';
 const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.yokdilappnew';
 
+// Temiz Play ikonu (Android robotu yerine)
+const PlayIcon = () => (
+  <svg width="18" height="20" viewBox="0 0 18 20" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+    <path
+      d="M1 1.6v16.8c0 .62.69 1 1.22.66l13.9-8.4a.78.78 0 0 0 0-1.32L2.22.94A.78.78 0 0 0 1 1.6Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 const HomeScreen = () => {
   const features = [
     {
@@ -53,18 +63,26 @@ const HomeScreen = () => {
     }
   ];
 
-  // Sitede sadece KÜÇÜK bir demo — tamamı uygulamada
+  // Sitede sadece küçük bir demo — tamamı uygulamada
   const demoWords = [
-    { en: "acceptance", tr: "kabul", ex: "Patient acceptance of novel therapeutic regimens remains critical." },
+    { en: "acceptance", tr: "kabul", ex: "Patient acceptance of new therapeutic regimens remains critical." },
     { en: "acquisition", tr: "edinim, kazanım", ex: "The acquisition of antibiotic resistance genes poses a threat." },
     { en: "adjustment", tr: "ayarlama, uyum", ex: "Dosage adjustment is required in patients with renal impairment." },
-    { en: "inadvertent", tr: "kasıtsız, dikkatsiz", ex: "An inadvertent error in dosage calculation can be serious." }
+    { en: "inadvertent", tr: "kasıtsız, dikkatsiz", ex: "An inadvertent error in dosage calculation can be serious." },
+    { en: "avoidance", tr: "kaçınma", ex: "Avoidance of allergens is the first step in treatment." },
+    { en: "impairment", tr: "bozulma, yetersizlik", ex: "Renal impairment alters drug clearance significantly." },
+    { en: "adverse", tr: "olumsuz, ters", ex: "The drug was withdrawn due to severe adverse effects." },
+    { en: "prevalence", tr: "yaygınlık, sıklık", ex: "The prevalence of diabetes has risen sharply worldwide." },
+    { en: "adherence", tr: "bağlılık, uyum", ex: "Treatment adherence is crucial for chronic disease control." },
+    { en: "susceptible", tr: "duyarlı, yatkın", ex: "Elderly patients are more susceptible to infections." }
   ];
 
   const demoConjunctions = [
     { en: "Along with", tr: "yanı sıra, ek olarak" },
     { en: "Besides", tr: "yanı sıra, ayrıca" },
     { en: "Moreover", tr: "dahası" },
+    { en: "Whereas", tr: "oysa, halbuki" },
+    { en: "Unless", tr: "-medikçe, eğer ...mazsa" },
     { en: "Neither...nor", tr: "ne...ne de" },
     { en: "For instance", tr: "örneğin" },
     { en: "Lest", tr: "…mesin diye (olumsuz amaç)" }
@@ -75,10 +93,12 @@ const HomeScreen = () => {
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
-          <h1 className="hero-title">YÖKDİL'de Başarının Anahtarı</h1>
+          <h1 className="hero-title">
+            YÖKDİL'de <span className="gold">Başarının Anahtarı</span>
+          </h1>
           <p className="hero-description">
             Yıllarca YÖKDİL sınavlarında çıkmış kelimeleri kategorize ederek hazırladık.
-            Sağlık, Fen, Sosyal alanlarında yüzlerce kelimeyi öğrenin ve Kelime Avı oyunu ile pekiştirin!
+            Sağlık, Fen, Sosyal alanlarında yüzlerce kelimeyi öğren ve Kelime Avı oyunu ile pekiştir!
           </p>
           <div className="hero-buttons">
             <a
@@ -87,11 +107,11 @@ const HomeScreen = () => {
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              🤖 Google Play'den İndir
+              <PlayIcon /> Google Play'den İndir
             </a>
           </div>
           <p className="ios-note">
-            iPhone / iPad mı kullanıyorsun? Aşağıdan birkaç kelimeye tarayıcıdan göz atabilirsin 👇
+            iPhone / iPad mı kullanıyorsun? Aşağıdan kelimelere tarayıcıdan göz atabilirsin 👇
           </p>
         </div>
       </section>
@@ -122,7 +142,8 @@ const HomeScreen = () => {
           </p>
 
           <h3 className="demo-subtitle">📚 Örnek Kelimeler</h3>
-          <div className="demo-grid">
+          <p className="demo-hint">👉 Kaydırarak hepsine bak</p>
+          <div className="demo-slider">
             {demoWords.map((w, i) => (
               <div key={i} className="demo-word-card">
                 <div className="demo-word-en">{w.en}</div>
@@ -153,7 +174,7 @@ const HomeScreen = () => {
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              🤖 Tamamı için Google Play'den İndir
+              <PlayIcon /> Tamamı için Google Play'den İndir
             </a>
           </div>
         </div>
