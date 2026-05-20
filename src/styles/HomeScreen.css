@@ -353,3 +353,120 @@
 .hero-buttons {
   animation: fadeIn 1s ease-out 0.2s both;
 }
+
+/* Demo / Önizleme Section */
+.demo {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+}
+
+.demo-intro {
+  text-align: center;
+  font-size: 1.15rem;
+  color: #6b7280;
+  max-width: 720px;
+  margin: -2.5rem auto 2.5rem;
+  line-height: 1.6;
+}
+
+.demo-subtitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 2.5rem 0 1.5rem;
+  text-align: center;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.demo-word-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.demo-word-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(109, 40, 217, 0.12);
+}
+
+.demo-word-en {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #6d28d9;
+}
+
+.demo-word-tr {
+  font-size: 1.05rem;
+  color: #1f2937;
+  font-weight: 600;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.demo-word-ex {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.demo-conj-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.demo-conj-item {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.demo-conj-en {
+  font-weight: 700;
+  color: #6d28d9;
+  min-width: 140px;
+}
+
+.demo-conj-arrow {
+  color: #a78bfa;
+  font-weight: bold;
+}
+
+.demo-conj-tr {
+  color: #374151;
+}
+
+.demo-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.demo-note {
+  font-size: 1.1rem;
+  color: #374151;
+  margin: 0 auto 1.5rem;
+  max-width: 620px;
+  line-height: 1.6;
+}
+
+.demo-cta .btn {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
