@@ -199,8 +199,7 @@ const HomeScreen = () => {
               </ul>
             </div>
 
-            <div className="pricing-card pricing-card-popular">
-              <div className="popular-badge">EN POPÜLER</div>
+            <div className="pricing-card">
               <h3 className="pricing-title">Aylık Plan</h3>
               <div className="pricing-price">
                 <span className="price">₺98.99</span>
@@ -211,6 +210,21 @@ const HomeScreen = () => {
                 <li>Haftalığa göre daha ekonomik</li>
                 <li>Reklamsız deneyim</li>
                 <li>Oluşturduğun kartlar kalıcı olarak senin</li>
+              </ul>
+            </div>
+
+            <div className="pricing-card pricing-card-popular">
+              <div className="popular-badge">EN AVANTAJLI</div>
+              <h3 className="pricing-title">Ömür Boyu</h3>
+              <div className="pricing-price">
+                <span className="price">₺249</span>
+                <span className="period">/tek seferlik</span>
+              </div>
+              <ul className="pricing-features">
+                <li>Tüm özellikler sınırsız ve ömür boyu</li>
+                <li>Reklamsız deneyim</li>
+                <li>Kendi Kartını Yarat + Kamp Modu</li>
+                <li>Tek ödeme, bir daha ödeme yok</li>
               </ul>
             </div>
           </div>
