@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cikmiskelimeler.com.tr/sitemap.xml
