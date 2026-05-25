@@ -50,7 +50,12 @@ def header(active=''):
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
 <a class="hbtn" href="{PLAY}" target="_blank" rel="noopener">İndir</a>
-</div></div></header>'''
+<button class="iconbtn menubtn" onclick="toggleMenu()" title="Menü">☰</button>
+</div></div>
+<div class="mobmenu" id="mobmenu">
+<a href="/kelimeler.html">Kelimeler</a><a href="/baglaclar.html">Bağlaçlar</a>
+<a href="#" onclick="openNotes();toggleMenu();return false">Notlarım</a><a href="/#premium" onclick="toggleMenu()">Premium</a>
+</div></header>'''
 
 def footer():
     return f'''<footer><div class="wrap foot">
@@ -83,13 +88,13 @@ NOTES_INNER='''<div class="tabs"><button id="tabW" class="on" onclick="setTab('w
  <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
  <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>'''
 
-NOTES_DRAWER='''<div class="scrim" id="scrim" onclick="closeNotes()"></div>
+NOTES_DRAWER='''<div class="drawerwrap" id="drawerwrap"><div class="scrim" id="scrim" onclick="closeNotes()"></div>
 <aside class="drawer" id="drawer">
  <div class="rz" id="rz"></div>
  <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
    <div class="dh-actions"><span class="mx" onclick="toggleMax()" title="Büyüt / küçült">⛶</span><span class="x" onclick="closeNotes()">×</span></div></div>
  '''+NOTES_INNER+'''
-</aside>'''
+</aside></div>'''
 
 def page(body,title,desc,canonical,active='',withNotes=True):
     # not çekmecesi + kütüphaneler artık her sayfada (header "Notlarım" yandan açar)

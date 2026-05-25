@@ -18,7 +18,12 @@
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
 <a class="hbtn" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">İndir</a>
-</div></div></header><svg width="0" height="0" style="position:absolute"><defs>
+<button class="iconbtn menubtn" onclick="toggleMenu()" title="Menü">☰</button>
+</div></div>
+<div class="mobmenu" id="mobmenu">
+<a href="/kelimeler.html">Kelimeler</a><a href="/baglaclar.html">Bağlaçlar</a>
+<a href="#" onclick="openNotes();toggleMenu();return false">Notlarım</a><a href="/#premium" onclick="toggleMenu()">Premium</a>
+</div></header><svg width="0" height="0" style="position:absolute"><defs>
 <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter>
 <filter id="liquid" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.010" numOctaves="2" seed="11" result="n"/><feGaussianBlur in="n" stdDeviation="1.1" result="nb"/><feDisplacementMap in="SourceGraphic" in2="nb" scale="95" xChannelSelector="R" yChannelSelector="G"/></filter>
 </defs></svg>
@@ -40,7 +45,7 @@
 <div class="pc pop"><h3>Ömür Boyu</h3><div class="amt">₺249<small> /tek sefer</small></div><ul><li>Tüm özellikler sınırsız</li><li>Reklamsız + Kamp Modu</li><li>Kendi Kartını Yarat</li><li>Tek ödeme, bir daha yok</li></ul><a class="pbtn" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">Seç</a></div>
 <div class="pc"><h3>Aylık</h3><div class="amt">₺98.99<small> /ay</small></div><ul><li>Tüm haftalık özellikler</li><li>Daha ekonomik</li><li>Kartların kalıcı senin</li></ul><a class="pbtn" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">Seç</a></div>
 </div></div></section></div>
-<section class="cta"><div class="wrap"><h2>Bugün çalışmaya başla</h2><p>Ücretsiz indir, ister web'den ister uygulamadan.</p><a class="bp" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">Google Play'den indir</a></div></section><div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<section class="cta"><div class="wrap"><h2>Bugün çalışmaya başla</h2><p>Ücretsiz indir, ister web'den ister uygulamadan.</p><a class="bp" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">Google Play'den indir</a></div></section><div class="drawerwrap" id="drawerwrap"><div class="scrim" id="scrim" onclick="closeNotes()"></div>
 <aside class="drawer" id="drawer">
  <div class="rz" id="rz"></div>
  <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
@@ -69,7 +74,7 @@
  <div class="surface" id="surf"><div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div><canvas id="cv" style="display:none"></canvas></div>
  <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
  <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
-</aside><footer><div class="wrap foot">
+</aside></div><footer><div class="wrap foot">
 <span>© 2026 Çıkmış Kelimeler</span>
 <span><a href="/kullanim-sartlari.html">Kullanım Şartları</a> · <a href="/gizlilik.html">Gizlilik</a> · <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></span>
 </div></footer><script src="/assets/app.js"></script></body></html>
