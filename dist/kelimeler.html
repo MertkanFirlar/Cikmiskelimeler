@@ -11,9 +11,9 @@
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/assets/style.css">
 <script>(function(){try{if(localStorage.getItem('cktheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-</head><body><script>(function(){try{if(localStorage.getItem('ckanim')==='off')document.body.classList.add('no-anim');}catch(e){}})();</script><header><div class="nav">
-<a class="brand" href="/"><span class="dot"></span> Çıkmış Kelimeler</a>
-<nav class="links"><a class="on" href="/kelimeler.html">Kelimeler</a><a class="" href="/baglaclar.html">Bağlaçlar</a><a class="" href="/notlarim.html">Notlarım</a><a class="" href="/#premium">Premium</a></nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head><body><script>(function(){try{if(localStorage.getItem('ckanim')==='off')document.body.classList.add('no-anim');}catch(e){}})();</script><header><div class="nav">
+<a class="brand" href="/"><img class="dot" src="/logo192.png" alt=""> Çıkmış Kelimeler</a>
+<nav class="links"><a class="on" href="/kelimeler.html">Kelimeler</a><a class="" href="/baglaclar.html">Bağlaçlar</a><a href="#" onclick="openNotes();return false">Notlarım</a><a class="" href="/#premium">Premium</a></nav>
 <div class="nav-right">
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
@@ -25,7 +25,36 @@
 <div class="lava"><span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span><span class="ball b4"></span><span class="ball b5"></span></div><div class="wrap"><div class="phead"><div class="crumb"><a href="/">Ana Sayfa</a> › Kelimeler</div>
 <h1>YÖKDİL <span class="ac">Çıkmış Kelimeler</span></h1>
 <p class="sub">2013'ten bugüne tüm YÖKDİL çıkmış kelimeleri alana ve yıla göre. Ücretsiz çalış, not al, PDF indir.</p></div>
-<section style="padding:10px 0 60px"><div class="cats"><a class="cat" href="/kelime/health-2025.html"><div class="e">🩺</div><h3>Sağlık</h3><p>614 kelime · 13 yıl</p><div class="yrs"><a href="/kelime/health-2025.html">2025</a><a href="/kelime/health-2024.html">2024</a><a href="/kelime/health-2023.html">2023</a><a href="/kelime/health-2022.html">2022</a><a href="/kelime/health-2021.html">2021</a><a href="/kelime/health-2020.html">2020</a><a href="/kelime/health-2019.html">2019</a><a href="/kelime/health-2018.html">2018</a><a href="/kelime/health-2017.html">2017</a><a href="/kelime/health-2016.html">2016</a><a href="/kelime/health-2015.html">2015</a><a href="/kelime/health-2014.html">2014</a><a href="/kelime/health-2013.html">2013</a></div></a><a class="cat" href="/kelime/science-2025.html"><div class="e">🔬</div><h3>Fen</h3><p>392 kelime · 8 yıl</p><div class="yrs"><a href="/kelime/science-2025.html">2025</a><a href="/kelime/science-2024.html">2024</a><a href="/kelime/science-2023.html">2023</a><a href="/kelime/science-2022.html">2022</a><a href="/kelime/science-2021.html">2021</a><a href="/kelime/science-2020.html">2020</a><a href="/kelime/science-2019.html">2019</a><a href="/kelime/science-2018.html">2018</a></div></a><a class="cat" href="/kelime/social-2025.html"><div class="e">🌍</div><h3>Sosyal</h3><p>373 kelime · 8 yıl</p><div class="yrs"><a href="/kelime/social-2025.html">2025</a><a href="/kelime/social-2024.html">2024</a><a href="/kelime/social-2023.html">2023</a><a href="/kelime/social-2022.html">2022</a><a href="/kelime/social-2021.html">2021</a><a href="/kelime/social-2020.html">2020</a><a href="/kelime/social-2019.html">2019</a><a href="/kelime/social-2018.html">2018</a></div></a><a class="cat" href="/baglaclar.html"><div class="e">🔗</div><h3>Bağlaçlar</h3><p>93 bağlaç · rehber</p><div class="yrs"><a href="/baglaclar.html">Tümü</a></div></a></div></section></div><footer><div class="wrap foot">
+<section style="padding:10px 0 60px"><div class="cats"><a class="cat" href="/kelime/health-2025.html"><div class="e">🩺</div><h3>Sağlık</h3><p>614 kelime · 13 yıl</p><div class="yrs"><a href="/kelime/health-2025.html">2025</a><a href="/kelime/health-2024.html">2024</a><a href="/kelime/health-2023.html">2023</a><a href="/kelime/health-2022.html">2022</a><a href="/kelime/health-2021.html">2021</a><a href="/kelime/health-2020.html">2020</a><a href="/kelime/health-2019.html">2019</a><a href="/kelime/health-2018.html">2018</a><a href="/kelime/health-2017.html">2017</a><a href="/kelime/health-2016.html">2016</a><a href="/kelime/health-2015.html">2015</a><a href="/kelime/health-2014.html">2014</a><a href="/kelime/health-2013.html">2013</a></div></a><a class="cat" href="/kelime/science-2025.html"><div class="e">🔬</div><h3>Fen</h3><p>392 kelime · 8 yıl</p><div class="yrs"><a href="/kelime/science-2025.html">2025</a><a href="/kelime/science-2024.html">2024</a><a href="/kelime/science-2023.html">2023</a><a href="/kelime/science-2022.html">2022</a><a href="/kelime/science-2021.html">2021</a><a href="/kelime/science-2020.html">2020</a><a href="/kelime/science-2019.html">2019</a><a href="/kelime/science-2018.html">2018</a></div></a><a class="cat" href="/kelime/social-2025.html"><div class="e">🌍</div><h3>Sosyal</h3><p>373 kelime · 8 yıl</p><div class="yrs"><a href="/kelime/social-2025.html">2025</a><a href="/kelime/social-2024.html">2024</a><a href="/kelime/social-2023.html">2023</a><a href="/kelime/social-2022.html">2022</a><a href="/kelime/social-2021.html">2021</a><a href="/kelime/social-2020.html">2020</a><a href="/kelime/social-2019.html">2019</a><a href="/kelime/social-2018.html">2018</a></div></a><a class="cat" href="/baglaclar.html"><div class="e">🔗</div><h3>Bağlaçlar</h3><p>93 bağlaç · rehber</p><div class="yrs"><a href="/baglaclar.html">Tümü</a></div></a></div></section></div><div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<aside class="drawer" id="drawer">
+ <div class="rz" id="rz"></div>
+ <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
+   <div class="dh-actions"><span class="mx" onclick="toggleMax()" title="Büyüt / küçült">⛶</span><span class="x" onclick="closeNotes()">×</span></div></div>
+ <div class="tabs"><button id="tabW" class="on" onclick="setTab('w')">Yaz</button><button id="tabD" onclick="setTab('d')">Çiz</button></div>
+ <div class="tools" id="toolsW">
+   <select id="ff" onchange="cmd('fontName',this.value)" title="Yazı tipi"><option value="Nunito">Nunito</option><option value="Baloo 2">Baloo</option><option value="Georgia">Serif</option><option value="Courier New">Mono</option><option value="Comic Sans MS">El yazısı</option></select>
+   <select id="blk" onchange="cmd('formatBlock',this.value)" title="Stil / başlık"><option value="P">Normal</option><option value="H1">Başlık 1</option><option value="H2">Başlık 2</option></select>
+   <select id="fs" onchange="cmd('fontSize',this.value)" title="Boyut"><option value="2">Küçük</option><option value="3" selected>Orta</option><option value="5">Büyük</option><option value="7">Dev</option></select>
+   <span class="sep"></span>
+   <button onclick="cmd('bold')" title="Kalın"><b>B</b></button><button onclick="cmd('italic')" title="İtalik"><i>I</i></button>
+   <button onclick="cmd('underline')" title="Altı çizili"><u>U</u></button><button onclick="cmd('strikeThrough')" title="Üstü çizili"><s>S</s></button>
+   <span class="sep"></span>
+   <button onclick="cmd('insertUnorderedList')" title="Madde">•</button><button onclick="cmd('insertOrderedList')" title="Numaralı">1.</button><button onclick="addTodo()" title="Yapılacak">☑</button>
+   <span class="sep"></span>
+   <button onclick="cmd('justifyLeft')" title="Sola">⯇</button><button onclick="cmd('justifyCenter')" title="Ortala">≡</button><button onclick="cmd('justifyRight')" title="Sağa">⯈</button>
+   <span class="sep"></span>
+   <span id="swT" title="Yazı rengi"></span><span id="swH" title="Fosforlu vurgu"></span>
+   <span class="sep"></span>
+   <select id="paper" onchange="setPaper(this.value)" title="Kağıt"><option value="plain">Düz</option><option value="lined">Çizgili</option><option value="grid">Kareli</option><option value="dots">Noktalı</option></select>
+   <button onclick="cmd('removeFormat')" title="Biçimi temizle">⌫</button>
+ </div>
+ <div class="tools" id="toolsD" style="display:none">
+   <span id="swD"></span><span class="brush" id="brD"></span><button id="erB" onclick="toggleEraser()">🧽 Silgi</button>
+ </div>
+ <div class="surface" id="surf"><div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div><canvas id="cv" style="display:none"></canvas></div>
+ <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
+ <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
+</aside><footer><div class="wrap foot">
 <span>© 2026 Çıkmış Kelimeler</span>
 <span><a href="/kullanim-sartlari.html">Kullanım Şartları</a> · <a href="/gizlilik.html">Gizlilik</a> · <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></span>
 </div></footer><script src="/assets/app.js"></script></body></html>

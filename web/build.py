@@ -44,8 +44,8 @@ def header(active=''):
     def lk(href,label,key):
         return f'<a class="{"on" if key==active else ""}" href="{href}">{label}</a>'
     return f'''<header><div class="nav">
-<a class="brand" href="/"><span class="dot"></span> Çıkmış Kelimeler</a>
-<nav class="links">{lk("/kelimeler.html","Kelimeler","kelimeler")}{lk("/baglaclar.html","Bağlaçlar","baglaclar")}{lk("/notlarim.html","Notlarım","notlarim")}{lk("/#premium","Premium","")}</nav>
+<a class="brand" href="/"><img class="dot" src="/logo192.png" alt=""> Çıkmış Kelimeler</a>
+<nav class="links">{lk("/kelimeler.html","Kelimeler","kelimeler")}{lk("/baglaclar.html","Bağlaçlar","baglaclar")}<a href="#" onclick="openNotes();return false">Notlarım</a>{lk("/#premium","Premium","")}</nav>
 <div class="nav-right">
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
@@ -91,8 +91,9 @@ NOTES_DRAWER='''<div class="scrim" id="scrim" onclick="closeNotes()"></div>
  '''+NOTES_INNER+'''
 </aside>'''
 
-def page(body,title,desc,canonical,active='',withNotes=False):
-    return (head(title,desc,canonical,withNotes)+'<body>'+ANIM+header(active)+LAVA+body+footer()
+def page(body,title,desc,canonical,active='',withNotes=True):
+    # not çekmecesi + kütüphaneler artık her sayfada (header "Notlarım" yandan açar)
+    return (head(title,desc,canonical,True)+'<body>'+ANIM+header(active)+LAVA+body+NOTES_DRAWER+footer()
             +'<script src="/assets/app.js"></script></body></html>')
 
 def write(path,content):
@@ -121,7 +122,7 @@ for f in os.listdir(pub):
     if os.path.isfile(src): shutil.copy(src,os.path.join(DIST,f))
 # manifest da kopyalandı; google verification, CNAME, robots, favicon, logo'lar public'ten geldi
 
-urls=[('/',1.0),('/kelimeler.html',0.9),('/baglaclar.html',0.8),('/notlarim.html',0.6),('/kullanim-sartlari.html',0.3),('/gizlilik.html',0.3)]
+urls=[('/',1.0),('/kelimeler.html',0.9),('/baglaclar.html',0.8),('/kullanim-sartlari.html',0.3),('/gizlilik.html',0.3)]
 
 # ---- ANASAYFA ----
 prev=[('prevalence','yaygınlık, sıklık','2023 · Sağlık'),('adverse','olumsuz, ters','2022 · Sağlık'),
@@ -174,14 +175,9 @@ write('kelimeler.html',page(hub,'YÖKDİL Çıkmış Kelimeler — Tüm Yıllar 
 
 # ---- HER KELIME SAYFASI ----
 def chips(cat,year):
-    out=[]
-    for c,(lab,_) in CATS.items():
-        ys=sorted(data[c].keys(),reverse=True)
-        href=f'/kelime/{c}-{ys[0]}.html'
-        out.append(f'<a class="{"on" if c==cat else ""}" href="{href}">{lab}</a>')
-    for y in sorted(data[cat].keys(),reverse=True):
-        out.append(f'<a class="{"on" if y==year else ""}" href="/kelime/{cat}-{y}.html">{y}</a>')
-    return ''.join(out)
+    cs=''.join(f'<a class="{"on" if c==cat else ""}" href="/kelime/{c}-{sorted(data[c].keys(),reverse=True)[0]}.html">{lab}</a>' for c,(lab,_) in CATS.items())
+    ys=''.join(f'<a class="{"on" if y==year else ""}" href="/kelime/{cat}-{y}.html">{y}</a>' for y in sorted(data[cat].keys(),reverse=True))
+    return f'<div class="chips chipgroups"><div class="chiprow"><span class="cl">Alan</span>{cs}</div><div class="chiprow"><span class="cl">Yıl</span>{ys}</div></div>'
 
 for cat,(label,emoji) in CATS.items():
     for year,words in data[cat].items():
@@ -190,12 +186,11 @@ for cat,(label,emoji) in CATS.items():
 <div class="crumb"><a href="/">Ana Sayfa</a> › <a href="/kelimeler.html">Kelimeler</a> › {label} › {year}</div>
 <h1>YÖKDİL {year} <span class="ac">{label}</span> Çıkmış Kelimeler</h1>
 <p class="sub">{year} YÖKDİL {label} oturumunda çıkmış kelimeler, anlamları ve akademik örnek cümleleriyle. Ücretsiz çalış, not al, PDF indir.</p>
-<div class="chips">{chips(cat,year)}</div></div>
+{chips(cat,year)}</div>
 <div class="toolbar"><input class="search" id="q" placeholder="🔍 Kelime ara…"><div class="toggle"><button id="bg" class="on" onclick="setView('grid')">⊞</button><button id="bl" onclick="setView('list')">☰</button></div><button class="notesbtn" onclick="openNotes()">📝 Notlarım</button></div>
 <div class="count" id="cnt">{len(words)} kelime · {year} {label}</div>
 <div id="list" class="grid" data-label="{year} {label}">{cards}</div>
-<div style="height:50px"></div></div>
-{NOTES_DRAWER}'''
+<div style="height:50px"></div></div>'''
         t=f'YÖKDİL {year} {label} Çıkmış Kelimeler ve Örnek Cümleler'
         d=f'{year} YÖKDİL {label} sınavında çıkmış {len(words)} kelime, Türkçe anlamları ve akademik örnek cümleleri. Ücretsiz çalış, not al, PDF indir.'
         u=f'{BASE}/kelime/{cat}-{year}.html'
@@ -209,18 +204,9 @@ body=f'''<div class="wrap"><div class="phead"><div class="crumb"><a href="/">Ana
 <p class="sub">YÖKDİL ve YDS'de sık çıkan İngilizce bağlaçlar, Türkçe anlamları ve örnek cümleleriyle. Ücretsiz çalış, not al.</p></div>
 <div class="toolbar"><input class="search" id="q" placeholder="🔍 Bağlaç ara…"><div class="toggle"><button id="bg" class="on" onclick="setView('grid')">⊞</button><button id="bl" onclick="setView('list')">☰</button></div><button class="notesbtn" onclick="openNotes()">📝 Notlarım</button></div>
 <div class="count" id="cnt">{len(data["conjunctions"])} bağlaç</div>
-<div id="list" class="grid" data-label="bağlaç">{cj}</div><div style="height:50px"></div></div>{NOTES_DRAWER}'''
+<div id="list" class="grid" data-label="bağlaç">{cj}</div><div style="height:50px"></div></div>'''
 write('baglaclar.html',page(body,'YÖKDİL Bağlaçlar Rehberi — Tüm Bağlaçlar ve Örnekler',
       'YÖKDİL ve YDS bağlaçları: anlamları ve örnek cümleleri. Along with, moreover, whereas, unless ve daha fazlası.',BASE+'/baglaclar.html','baglaclar',withNotes=True))
-
-# ---- NOTLARIM (tam sayfa) ----
-np_body='''<div class="wrap"><div class="phead"><div class="crumb"><a href="/">Ana Sayfa</a> › Notlarım</div>
-<h1><span class="ac">Notlarım</span></h1><p class="sub">Çalışırken yaz, çiz, renklendir; otomatik kaydolur, PDF indir. iPhone, iPad, Android, bilgisayar — her yerde.</p></div>
-<div class="notepage"><div class="nbox" id="notebox">
- '''+NOTES_INNER+'''
-</div></div></div>'''
-write('notlarim.html',page(np_body,'Notlarım — Çıkmış Kelimeler | Online Not Defteri (Yaz, Çiz, PDF)',
-      'Ücretsiz online not defteri: yaz, çiz, renklendir, başlık ekle, PDF indir. YÖKDİL çalışırken notlarını tut.',BASE+'/notlarim.html','notlarim',withNotes=True))
 
 # ---- LEGAL ----
 TERMS='''<h1>Kullanım Şartları</h1><p class="upd"><strong>Son Güncelleme:</strong> 12 Ağustos 2025</p>
