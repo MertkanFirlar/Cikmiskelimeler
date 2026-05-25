@@ -11,9 +11,9 @@
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/assets/style.css">
 <script>(function(){try{if(localStorage.getItem('cktheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
-</head><body><script>(function(){try{if(localStorage.getItem('ckanim')==='off')document.body.classList.add('no-anim');}catch(e){}})();</script><header><div class="nav">
-<a class="brand" href="/"><span class="dot"></span> Çıkmış Kelimeler</a>
-<nav class="links"><a class="" href="/kelimeler.html">Kelimeler</a><a class="" href="/baglaclar.html">Bağlaçlar</a><a class="" href="/notlarim.html">Notlarım</a><a class="on" href="/#premium">Premium</a></nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head><body><script>(function(){try{if(localStorage.getItem('ckanim')==='off')document.body.classList.add('no-anim');}catch(e){}})();</script><header><div class="nav">
+<a class="brand" href="/"><img class="dot" src="/logo192.png" alt=""> Çıkmış Kelimeler</a>
+<nav class="links"><a class="" href="/kelimeler.html">Kelimeler</a><a class="" href="/baglaclar.html">Bağlaçlar</a><a href="#" onclick="openNotes();return false">Notlarım</a><a class="on" href="/#premium">Premium</a></nav>
 <div class="nav-right">
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
@@ -32,7 +32,36 @@
 <h2>6. Sorumluluk Reddi</h2><ul><li>Uygulama "olduğu gibi" sunulur, garanti verilmez.</li><li>Oluşabilecek zararlardan geliştirici sorumlu tutulamaz.</li></ul>
 <h2>7. Üçüncü Taraf Hizmetler</h2><p>Google AdMob ve Google Play Faturalandırma kendi şartlarına tabidir.</p>
 <h2>8. Değişiklikler</h2><p>Geliştirici şartları önceden bildirmeden değiştirebilir.</p>
-<h2>9. İletişim</h2><p>💬 Destek: <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></p></div></div><footer><div class="wrap foot">
+<h2>9. İletişim</h2><p>💬 Destek: <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></p></div></div><div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<aside class="drawer" id="drawer">
+ <div class="rz" id="rz"></div>
+ <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
+   <div class="dh-actions"><span class="mx" onclick="toggleMax()" title="Büyüt / küçült">⛶</span><span class="x" onclick="closeNotes()">×</span></div></div>
+ <div class="tabs"><button id="tabW" class="on" onclick="setTab('w')">Yaz</button><button id="tabD" onclick="setTab('d')">Çiz</button></div>
+ <div class="tools" id="toolsW">
+   <select id="ff" onchange="cmd('fontName',this.value)" title="Yazı tipi"><option value="Nunito">Nunito</option><option value="Baloo 2">Baloo</option><option value="Georgia">Serif</option><option value="Courier New">Mono</option><option value="Comic Sans MS">El yazısı</option></select>
+   <select id="blk" onchange="cmd('formatBlock',this.value)" title="Stil / başlık"><option value="P">Normal</option><option value="H1">Başlık 1</option><option value="H2">Başlık 2</option></select>
+   <select id="fs" onchange="cmd('fontSize',this.value)" title="Boyut"><option value="2">Küçük</option><option value="3" selected>Orta</option><option value="5">Büyük</option><option value="7">Dev</option></select>
+   <span class="sep"></span>
+   <button onclick="cmd('bold')" title="Kalın"><b>B</b></button><button onclick="cmd('italic')" title="İtalik"><i>I</i></button>
+   <button onclick="cmd('underline')" title="Altı çizili"><u>U</u></button><button onclick="cmd('strikeThrough')" title="Üstü çizili"><s>S</s></button>
+   <span class="sep"></span>
+   <button onclick="cmd('insertUnorderedList')" title="Madde">•</button><button onclick="cmd('insertOrderedList')" title="Numaralı">1.</button><button onclick="addTodo()" title="Yapılacak">☑</button>
+   <span class="sep"></span>
+   <button onclick="cmd('justifyLeft')" title="Sola">⯇</button><button onclick="cmd('justifyCenter')" title="Ortala">≡</button><button onclick="cmd('justifyRight')" title="Sağa">⯈</button>
+   <span class="sep"></span>
+   <span id="swT" title="Yazı rengi"></span><span id="swH" title="Fosforlu vurgu"></span>
+   <span class="sep"></span>
+   <select id="paper" onchange="setPaper(this.value)" title="Kağıt"><option value="plain">Düz</option><option value="lined">Çizgili</option><option value="grid">Kareli</option><option value="dots">Noktalı</option></select>
+   <button onclick="cmd('removeFormat')" title="Biçimi temizle">⌫</button>
+ </div>
+ <div class="tools" id="toolsD" style="display:none">
+   <span id="swD"></span><span class="brush" id="brD"></span><button id="erB" onclick="toggleEraser()">🧽 Silgi</button>
+ </div>
+ <div class="surface" id="surf"><div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div><canvas id="cv" style="display:none"></canvas></div>
+ <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
+ <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
+</aside><footer><div class="wrap foot">
 <span>© 2026 Çıkmış Kelimeler</span>
 <span><a href="/kullanim-sartlari.html">Kullanım Şartları</a> · <a href="/gizlilik.html">Gizlilik</a> · <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></span>
 </div></footer><script src="/assets/app.js"></script></body></html>
