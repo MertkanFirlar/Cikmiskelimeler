@@ -1,0 +1,55 @@
+<!doctype html><html lang="tr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notlarım — Çıkmış Kelimeler | Online Not Defteri (Yaz, Çiz, PDF)</title>
+<meta name="description" content="Ücretsiz online not defteri: yaz, çiz, renklendir, başlık ekle, PDF indir. YÖKDİL çalışırken notlarını tut.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cikmiskelimeler.com.tr/notlarim.html">
+<meta property="og:title" content="Notlarım — Çıkmış Kelimeler | Online Not Defteri (Yaz, Çiz, PDF)"><meta property="og:description" content="Ücretsiz online not defteri: yaz, çiz, renklendir, başlık ekle, PDF indir. YÖKDİL çalışırken notlarını tut.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://cikmiskelimeler.com.tr/notlarim.html">
+<meta property="og:image" content="https://cikmiskelimeler.com.tr/logo512.png"><meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Çıkmış Kelimeler">
+<link rel="icon" type="image/png" href="/favicon.png"><link rel="manifest" href="/manifest.json">
+<link rel="stylesheet" href="/assets/style.css">
+<script>(function(){try{if(localStorage.getItem('cktheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script></head><body><script>(function(){try{if(localStorage.getItem('ckanim')==='off')document.body.classList.add('no-anim');}catch(e){}})();</script><header><div class="nav">
+<a class="brand" href="/"><span class="dot"></span> Çıkmış Kelimeler</a>
+<nav class="links"><a class="" href="/kelimeler.html">Kelimeler</a><a class="" href="/baglaclar.html">Bağlaçlar</a><a class="on" href="/notlarim.html">Notlarım</a><a class="" href="/#premium">Premium</a></nav>
+<div class="nav-right">
+<button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
+<button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
+<a class="hbtn" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">İndir</a>
+</div></div></header><svg width="0" height="0" style="position:absolute"><defs>
+<filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter>
+<filter id="liquid" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.010" numOctaves="2" seed="11" result="n"/><feGaussianBlur in="n" stdDeviation="1.1" result="nb"/><feDisplacementMap in="SourceGraphic" in2="nb" scale="95" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs></svg>
+<div class="lava"><span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span><span class="ball b4"></span><span class="ball b5"></span></div><div class="wrap"><div class="phead"><div class="crumb"><a href="/">Ana Sayfa</a> › Notlarım</div>
+<h1><span class="ac">Notlarım</span></h1><p class="sub">Çalışırken yaz, çiz, renklendir; otomatik kaydolur, PDF indir. iPhone, iPad, Android, bilgisayar — her yerde.</p></div>
+<div class="notepage"><div class="nbox" id="notebox">
+ <div class="tabs"><button id="tabW" class="on" onclick="setTab('w')">Yaz</button><button id="tabD" onclick="setTab('d')">Çiz</button></div>
+ <div class="tools" id="toolsW">
+   <select id="ff" onchange="cmd('fontName',this.value)" title="Yazı tipi"><option value="Nunito">Nunito</option><option value="Baloo 2">Baloo</option><option value="Georgia">Serif</option><option value="Courier New">Mono</option><option value="Comic Sans MS">El yazısı</option></select>
+   <select id="blk" onchange="cmd('formatBlock',this.value)" title="Stil / başlık"><option value="P">Normal</option><option value="H1">Başlık 1</option><option value="H2">Başlık 2</option></select>
+   <select id="fs" onchange="cmd('fontSize',this.value)" title="Boyut"><option value="2">Küçük</option><option value="3" selected>Orta</option><option value="5">Büyük</option><option value="7">Dev</option></select>
+   <span class="sep"></span>
+   <button onclick="cmd('bold')" title="Kalın"><b>B</b></button><button onclick="cmd('italic')" title="İtalik"><i>I</i></button>
+   <button onclick="cmd('underline')" title="Altı çizili"><u>U</u></button><button onclick="cmd('strikeThrough')" title="Üstü çizili"><s>S</s></button>
+   <span class="sep"></span>
+   <button onclick="cmd('insertUnorderedList')" title="Madde">•</button><button onclick="cmd('insertOrderedList')" title="Numaralı">1.</button><button onclick="addTodo()" title="Yapılacak">☑</button>
+   <span class="sep"></span>
+   <button onclick="cmd('justifyLeft')" title="Sola">⯇</button><button onclick="cmd('justifyCenter')" title="Ortala">≡</button><button onclick="cmd('justifyRight')" title="Sağa">⯈</button>
+   <span class="sep"></span>
+   <span id="swT" title="Yazı rengi"></span><span id="swH" title="Fosforlu vurgu"></span>
+   <span class="sep"></span>
+   <select id="paper" onchange="setPaper(this.value)" title="Kağıt"><option value="plain">Düz</option><option value="lined">Çizgili</option><option value="grid">Kareli</option><option value="dots">Noktalı</option></select>
+   <button onclick="cmd('removeFormat')" title="Biçimi temizle">⌫</button>
+ </div>
+ <div class="tools" id="toolsD" style="display:none">
+   <span id="swD"></span><span class="brush" id="brD"></span><button id="erB" onclick="toggleEraser()">🧽 Silgi</button>
+ </div>
+ <div class="surface" id="surf"><div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div><canvas id="cv" style="display:none"></canvas></div>
+ <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
+ <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
+</div></div></div><footer><div class="wrap foot">
+<span>© 2026 Çıkmış Kelimeler</span>
+<span><a href="/kullanim-sartlari.html">Kullanım Şartları</a> · <a href="/gizlilik.html">Gizlilik</a> · <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></span>
+</div></footer><script src="/assets/app.js"></script></body></html>
