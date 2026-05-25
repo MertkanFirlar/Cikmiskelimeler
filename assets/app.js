@@ -14,12 +14,20 @@ var lavaOn=false;
 function startLava(){
   if(lavaOn||document.body.classList.contains('no-anim'))return;
   var els=document.querySelectorAll('.lava .ball');if(!els.length)return;lavaOn=true;
-  var balls=[].map.call(els,function(el){return{el:el,w:el.offsetWidth,bx:el.offsetLeft,by:el.offsetTop,ax:16+Math.random()*22,ay:55+Math.random()*55,sx:0.00022+Math.random()*0.0003,sy:0.0003+Math.random()*0.0003,ph:Math.random()*6.28,rx:0,ry:0,sc:0};});
+  var balls=[].map.call(els,function(el){return{el:el,w:el.offsetWidth,bx:el.offsetLeft,by:el.offsetTop,ax:16+Math.random()*22,ay:55+Math.random()*55,sx:0.00022+Math.random()*0.0003,sy:0.0003+Math.random()*0.0003,ph:Math.random()*6.28,rx:0,ry:0,dn:0,rot:0};});
   var mX=-9999,mY=-9999;
   addEventListener('mousemove',function(e){mX=e.clientX;mY=e.clientY;},{passive:true});
   addEventListener('mouseout',function(){mX=-9999;mY=-9999;});
-  var R=320,F=120,SW=0.65;
-  function frame(t){balls.forEach(function(b){var ax=Math.sin(t*b.sx+b.ph)*b.ax,ay=Math.cos(t*b.sy+b.ph)*b.ay,cx=b.bx+b.w/2+ax,cy=b.by+b.w/2+ay,tx=0,ty=0,sc=0,dx=cx-mX,dy=cy-mY,d=Math.hypot(dx,dy)||1;if(d<R){var k=1-d/R,p=k*k*F,nx=dx/d,ny=dy/d;tx=nx*p-ny*p*SW;ty=ny*p+nx*p*SW;sc=k*0.16;}b.rx+=(tx-b.rx)*0.06;b.ry+=(ty-b.ry)*0.06;b.sc+=(sc-b.sc)*0.07;b.el.style.transform='translate('+(ax+b.rx)+'px,'+(ay+b.ry)+'px) scale('+(1+b.sc)+')';});requestAnimationFrame(frame);}
+  var R=300;
+  function frame(t){balls.forEach(function(b){
+    var ax=Math.sin(t*b.sx+b.ph)*b.ax,ay=Math.cos(t*b.sy+b.ph)*b.ay;
+    var cx=b.bx+b.w/2+ax,cy=b.by+b.w/2+ay,dx=cx-mX,dy=cy-mY,d=Math.hypot(dx,dy)||1;
+    var tx=0,ty=0,dent=0;
+    if(d<R){var k=1-d/R; dent=k*0.26; var pa=k*k*26; tx=dx/d*pa; ty=dy/d*pa; b.rot=Math.atan2(dy,dx)*180/Math.PI;}
+    b.rx+=(tx-b.rx)*0.08; b.ry+=(ty-b.ry)*0.08; b.dn+=(dent-b.dn)*0.12;
+    // imlece değen eksende sıkıştır = içe bükülme/ezilme hissi
+    b.el.style.transform='translate('+(ax+b.rx)+'px,'+(ay+b.ry)+'px) rotate('+b.rot+'deg) scale('+(1-b.dn)+','+(1+b.dn*0.5)+') rotate('+(-b.rot)+'deg)';
+  });requestAnimationFrame(frame);}
   requestAnimationFrame(frame);
 }
 startLava();
