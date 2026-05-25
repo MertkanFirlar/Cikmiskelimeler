@@ -18,7 +18,12 @@
 <button class="iconbtn" id="animBtn" onclick="toggleAnim()" title="Arka plan hareketi">✨</button>
 <button class="iconbtn" id="themeBtn" onclick="toggleTheme()" title="Koyu / açık tema">🌙</button>
 <a class="hbtn" href="https://play.google.com/store/apps/details?id=com.yokdilappnew" target="_blank" rel="noopener">İndir</a>
-</div></div></header><svg width="0" height="0" style="position:absolute"><defs>
+<button class="iconbtn menubtn" onclick="toggleMenu()" title="Menü">☰</button>
+</div></div>
+<div class="mobmenu" id="mobmenu">
+<a href="/kelimeler.html">Kelimeler</a><a href="/baglaclar.html">Bağlaçlar</a>
+<a href="#" onclick="openNotes();toggleMenu();return false">Notlarım</a><a href="/#premium" onclick="toggleMenu()">Premium</a>
+</div></header><svg width="0" height="0" style="position:absolute"><defs>
 <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter>
 <filter id="liquid" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.010" numOctaves="2" seed="11" result="n"/><feGaussianBlur in="n" stdDeviation="1.1" result="nb"/><feDisplacementMap in="SourceGraphic" in2="nb" scale="95" xChannelSelector="R" yChannelSelector="G"/></filter>
 </defs></svg>
@@ -32,7 +37,7 @@
 <h2>6. Sorumluluk Reddi</h2><p>Uygulama "olduğu gibi" sunulur. Kullanım kullanıcı sorumluluğundadır.</p>
 <h2>7. Üçüncü Taraf Hizmetler</h2><p>Google AdMob ve Google Play Faturalandırma'nın kendi gizlilik politikaları geçerlidir.</p>
 <h2>8. Değişiklikler</h2><p>Gizlilik politikası zaman zaman güncellenebilir.</p>
-<h2>9. İletişim</h2><p>💬 Destek: <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></p></div></div><div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<h2>9. İletişim</h2><p>💬 Destek: <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></p></div></div><div class="drawerwrap" id="drawerwrap"><div class="scrim" id="scrim" onclick="closeNotes()"></div>
 <aside class="drawer" id="drawer">
  <div class="rz" id="rz"></div>
  <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
@@ -61,7 +66,7 @@
  <div class="surface" id="surf"><div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div><canvas id="cv" style="display:none"></canvas></div>
  <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
  <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
-</aside><footer><div class="wrap foot">
+</aside></div><footer><div class="wrap foot">
 <span>© 2026 Çıkmış Kelimeler</span>
 <span><a href="/kullanim-sartlari.html">Kullanım Şartları</a> · <a href="/gizlilik.html">Gizlilik</a> · <a href="mailto:destekcikmis@gmail.com">destekcikmis@gmail.com</a></span>
 </div></footer><script src="/assets/app.js"></script></body></html>

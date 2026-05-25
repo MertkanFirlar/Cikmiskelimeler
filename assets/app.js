@@ -9,6 +9,10 @@ window.toggleTheme=function(){var dark=document.documentElement.getAttribute('da
 window.toggleAnim=function(){var off=document.body.classList.toggle('no-anim');localStorage.setItem('ckanim',off?'off':'on');updAnimBtn();if(!off)startLava();};
 updThemeBtn();updAnimBtn();
 
+/* ---- mobil menü ---- */
+window.toggleMenu=function(){var m=document.getElementById('mobmenu');if(m)m.classList.toggle('open');};
+document.addEventListener('click',function(e){var m=document.getElementById('mobmenu');if(!m||!m.classList.contains('open'))return;if(!e.target.closest('#mobmenu')&&!e.target.closest('.menubtn'))m.classList.remove('open');});
+
 /* ---- lav lambasi (sivi dokunus) ---- */
 var lavaOn=false;
 function startLava(){
