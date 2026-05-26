@@ -146,15 +146,16 @@ feat_html=''.join(f'<div class="feat"><div class="ic">{i}</div><h3>{t}</h3><p>{d
 total=sum(len(v) for c in ('health','science','social') for v in data[c].values())+len(data['conjunctions'])
 home=f'''<script>(function(){{var h=(location.hash||'').replace('#','').toLowerCase();if(h==='privacy'||h==='gizlilik')location.replace('/gizlilik.html');else if(h==='terms'||h==='kullanim'||h==='sartlar'||h==='kullanim-sartlari')location.replace('/kullanim-sartlari.html');}})();</script>
 <section class="hero"><div class="wrap"><div class="row">
-<div class="hcol"><span class="tag">● 2013–2025 tüm çıkmış kelimeler</span>
-<h1>YÖKDİL kelimelerini <span class="ac">sade</span> ve etkili çalış</h1>
-<p>Çıkmış kelimeler, anlamları ve örnek cümleleriyle tek yerde. Not al, PDF indir, oyunla pekiştir.</p>
+<div class="hcol"><span class="tag">● YÖKDİL · YDS · TIPDIL · 2013–2025</span>
+<h1>YÖKDİL <span class="ac">Çıkmış Kelimeler</span></h1>
+<p class="hsub">Sade ve etkili çalış · YÖKDİL · YDS · TIPDIL hazırlığı</p>
+<p>YÖKDİL, YDS ve TIPDIL sınavlarında çıkmış kelimeleri, anlamları ve örnek cümleleriyle tek yerde topladık. Not al, PDF indir, oyunla pekiştir.</p>
 <div class="hbtns"><a class="bp" href="{PLAY}" target="_blank" rel="noopener">Google Play'den indir</a><a class="bg" href="/kelimeler.html">Kelimelere göz at</a></div></div>
 <div class="preview"><div class="pv-bar"><i></i><i></i><i></i></div><div>{prev_html}</div></div>
 </div>
 <div class="statline"><div class="st"><div class="n">{total}+</div><div class="l">çıkmış kelime</div></div><div class="st"><div class="n">13 yıl</div><div class="l">2013–2025 arşivi</div></div><div class="st"><div class="n">3 alan</div><div class="l">Sağlık · Fen · Sosyal</div></div></div>
 </div></section>
-<section><div class="wrap"><div class="kicker">Özellikler</div><h2 class="h2">Sınava hazırlığın için her şey</h2><p class="lead">Karmaşa yok. Kelimeler düzenli, çalışması kolay.</p>
+<section><div class="wrap"><div class="kicker">Özellikler</div><h2 class="h2">YÖKDİL, YDS ve TIPDIL için çıkmış kelimeler</h2><p class="lead">Karmaşa yok. Kelimeler düzenli, çalışması kolay — YÖKDİL Sağlık, Fen, Sosyal başta olmak üzere YDS ve TIPDIL hazırlığına uygun.</p>
 <div class="feats">{feat_html}</div></div></section>
 <div class="pricewrap"><section id="premium"><div class="wrap"><div class="kicker">Premium</div><h2 class="h2">Reklamsız, kendi kartlarınla</h2><p class="lead">Satın alma uygulama içinde, Google Play güvencesiyle.</p>
 <div class="prices">
@@ -169,18 +170,19 @@ HOME_JSONLD=f'''<script type="application/ld+json">{{
 "@context":"https://schema.org",
 "@graph":[
  {{"@type":"WebSite","@id":"{BASE}/#website","url":"{BASE}/","name":"Çıkmış Kelimeler",
-  "description":"YÖKDİL’de çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlık.",
+  "description":"YÖKDİL, YDS ve TIPDIL sınavlarında çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlık.",
   "inLanguage":"tr-TR",
   "potentialAction":{{"@type":"SearchAction","target":{{"@type":"EntryPoint","urlTemplate":"{BASE}/kelimeler.html?q={{search_term_string}}"}},"query-input":"required name=search_term_string"}}}},
- {{"@type":"MobileApplication","name":"Çıkmış Kelimeler - YÖKDİL",
+ {{"@type":"MobileApplication","name":"Çıkmış Kelimeler - YÖKDİL · YDS · TIPDIL",
   "operatingSystem":"ANDROID","applicationCategory":"EducationalApplication",
   "url":"{BASE}/","installUrl":"{PLAY}",
-  "description":"YÖKDİL sınavlarında 2013’ten bugüne çıkmış kelimeler, bağlaçlar, Kamp Modu ve Kelime Avı oyunu ile akademik İngilizce kelime hazırlığı.",
+  "description":"YÖKDİL, YDS ve TIPDIL sınavlarında 2013’ten bugüne çıkmış kelimeler, bağlaçlar ve örnek cümlelerle akademik İngilizce kelime hazırlığı.",
+  "keywords":"yokdil, yökdil, yokdil çıkmış kelimeler, yds çıkmış kelimeler, tıpdil çıkmış kelimeler, akademik ingilizce, sınav kelime",
   "offers":{{"@type":"Offer","price":"0","priceCurrency":"TRY"}}}}
 ]}}</script>'''
 
-write('index.html',page(home,'Çıkmış Kelimeler: YÖKDİL Çıkmış Kelimeler ve Sınav Hazırlık',
-      'YÖKDİL\'de çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlan. Sağlık, Fen, Sosyal — 2013\'ten bugüne tüm çıkmış kelimeler, ücretsiz.',BASE+'/','',jsonld=HOME_JSONLD))
+write('index.html',page(home,'YÖKDİL Çıkmış Kelimeler — YDS, TIPDIL Sınav Hazırlık',
+      'YÖKDİL, YDS ve TIPDIL sınavlarında çıkmış kelimeleri, bağlaçları ve örnek cümleleri ücretsiz topladık. Sağlık, Fen, Sosyal — 2013\'ten bugüne tüm çıkmış kelimeler.',BASE+'/','',jsonld=HOME_JSONLD))
 
 # ---- KELIMELER HUB ----
 cathtml=''
