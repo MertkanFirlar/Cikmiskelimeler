@@ -29,7 +29,7 @@ def head(title,desc,canonical,withNotes=False,jsonld=''):
 <meta property="og:type" content="website"><meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{BASE}/logo512.png"><meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Çıkmış Kelimeler">
-<link rel="icon" type="image/png" href="/favicon.png"><link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="192x192" href="/favicon.png"><link rel="icon" type="image/png" sizes="512x512" href="/logo512.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/assets/style.css">
 <script>(function(){{try{{if(localStorage.getItem('cktheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}}catch(e){{}}}})();</script>
 {libs}{jsonld}</head>'''
