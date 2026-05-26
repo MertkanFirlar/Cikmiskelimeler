@@ -14,9 +14,11 @@ data=json.load(open(os.path.join(ROOT,'data.json'),encoding='utf-8'))
 def esc(s): return html.escape(s or '',quote=True)
 
 # ---- ortak parçalar ----
-def head(title,desc,canonical,withNotes=False):
+def head(title,desc,canonical,withNotes=False,jsonld=''):
     libs=('<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>'
           '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>') if withNotes else ''
+    # jsonld varsa <script type="application/ld+json">…</script> bloğu olarak gelir.
+    # Boş bırakılırsa hiçbir şey basılmaz (kelime sayfaları gibi alt sayfalar).
     return f'''<!doctype html><html lang="tr"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
@@ -30,7 +32,7 @@ def head(title,desc,canonical,withNotes=False):
 <link rel="icon" type="image/png" href="/favicon.png"><link rel="manifest" href="/manifest.json">
 <link rel="stylesheet" href="/assets/style.css">
 <script>(function(){{try{{if(localStorage.getItem('cktheme')==='dark')document.documentElement.setAttribute('data-theme','dark');}}catch(e){{}}}})();</script>
-{libs}</head>'''
+{libs}{jsonld}</head>'''
 
 LAVA='''<svg width="0" height="0" style="position:absolute"><defs>
 <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter>
@@ -96,9 +98,10 @@ NOTES_DRAWER='''<div class="drawerwrap" id="drawerwrap"><div class="scrim" id="s
  '''+NOTES_INNER+'''
 </aside></div>'''
 
-def page(body,title,desc,canonical,active='',withNotes=True):
+def page(body,title,desc,canonical,active='',withNotes=True,jsonld=''):
     # not çekmecesi + kütüphaneler artık her sayfada (header "Notlarım" yandan açar)
-    return (head(title,desc,canonical,True)+'<body>'+ANIM+header(active)+LAVA+body+NOTES_DRAWER+footer()
+    # jsonld → sadece ihtiyaç duyan sayfalar (ör. anasayfa) doldurur.
+    return (head(title,desc,canonical,True,jsonld)+'<body>'+ANIM+header(active)+LAVA+body+NOTES_DRAWER+footer()
             +'<script src="/assets/app.js"></script></body></html>')
 
 def write(path,content):
@@ -160,8 +163,24 @@ home=f'''<script>(function(){{var h=(location.hash||'').replace('#','').toLowerC
 <div class="pc"><h3>Aylık</h3><div class="amt">₺98.99<small> /ay</small></div><ul><li>Tüm haftalık özellikler</li><li>Daha ekonomik</li><li>Kartların kalıcı senin</li></ul><a class="pbtn" href="{PLAY}" target="_blank" rel="noopener">Seç</a></div>
 </div></div></section></div>
 <section class="cta"><div class="wrap"><h2>Bugün çalışmaya başla</h2><p>Ücretsiz indir, ister web'den ister uygulamadan.</p><a class="bp" href="{PLAY}" target="_blank" rel="noopener">Google Play'den indir</a></div></section>'''
+# Anasayfa için zengin sonuçlar (Google) — WebSite + MobileApplication.
+# Yapı schema.org @graph: arama sonuçlarında sitelink + uygulama kartı şansı.
+HOME_JSONLD=f'''<script type="application/ld+json">{{
+"@context":"https://schema.org",
+"@graph":[
+ {{"@type":"WebSite","@id":"{BASE}/#website","url":"{BASE}/","name":"Çıkmış Kelimeler",
+  "description":"YÖKDİL’de çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlık.",
+  "inLanguage":"tr-TR",
+  "potentialAction":{{"@type":"SearchAction","target":{{"@type":"EntryPoint","urlTemplate":"{BASE}/kelimeler.html?q={{search_term_string}}"}},"query-input":"required name=search_term_string"}}}},
+ {{"@type":"MobileApplication","name":"Çıkmış Kelimeler - YÖKDİL",
+  "operatingSystem":"ANDROID","applicationCategory":"EducationalApplication",
+  "url":"{BASE}/","installUrl":"{PLAY}",
+  "description":"YÖKDİL sınavlarında 2013’ten bugüne çıkmış kelimeler, bağlaçlar, Kamp Modu ve Kelime Avı oyunu ile akademik İngilizce kelime hazırlığı.",
+  "offers":{{"@type":"Offer","price":"0","priceCurrency":"TRY"}}}}
+]}}</script>'''
+
 write('index.html',page(home,'Çıkmış Kelimeler: YÖKDİL Çıkmış Kelimeler ve Sınav Hazırlık',
-      'YÖKDİL\'de çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlan. Sağlık, Fen, Sosyal — 2013\'ten bugüne tüm çıkmış kelimeler, ücretsiz.',BASE+'/',''))
+      'YÖKDİL\'de çıkmış kelimeler, bağlaçlar ve örnek cümlelerle sınava hazırlan. Sağlık, Fen, Sosyal — 2013\'ten bugüne tüm çıkmış kelimeler, ücretsiz.',BASE+'/','',jsonld=HOME_JSONLD))
 
 # ---- KELIMELER HUB ----
 cathtml=''
