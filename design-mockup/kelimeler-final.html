@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="tr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YÖKDİL 2023 Sağlık Çıkmış Kelimeler — Çıkmış Kelimeler</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0d0f1c;--gray:#5b6172;--line:#ececf1;--accent:#5b4be0;--accent-d:#4a3bc7;--accent-soft:#eef0ff;--bg2:#fafafc}
+body{font-family:'Nunito',sans-serif;color:var(--ink);background:#fff;font-weight:600}
+h1,h2,h3,.brand,.en{font-family:'Baloo 2',cursive}
+.wrap{max-width:1220px;margin:0 auto;padding:0 32px}
+a{text-decoration:none;color:inherit}
+/* lava */
+.lava{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;filter:url(#goo);opacity:.5}
+.ball{position:absolute;border-radius:50%;will-change:transform}
+.b1{width:210px;height:210px;left:5%;top:22%;background:#7b6cf0}
+.b2{width:150px;height:150px;left:18%;top:60%;background:#9a8bff}
+.b3{width:250px;height:250px;right:7%;top:24%;background:#8fb4ff}
+.b4{width:140px;height:140px;right:22%;bottom:12%;background:#bcaaff}
+.b5{width:180px;height:180px;left:46%;top:66%;background:#8f7cf0}
+header,.phead,main,footer{position:relative;z-index:1}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1220px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:18px;display:flex;gap:8px;align-items:center}
+.brand .dot{width:22px;height:22px;border-radius:7px;background:var(--accent)}
+.links{display:flex;gap:26px;font-size:14.5px;color:var(--gray)}
+.links a.on,.links a:hover{color:var(--ink)}
+.hbtn{font-size:14px;font-weight:700;color:#fff;background:var(--ink);padding:9px 16px;border-radius:10px}
+/* page head */
+.phead{padding:34px 0 6px}
+.crumb{font-size:13px;color:var(--gray);margin-bottom:8px}
+.phead h1{font-size:40px;font-weight:800;letter-spacing:-.5px}
+.phead h1 .ac{color:var(--accent)}
+.phead p{color:var(--gray);margin-top:8px;font-size:16px;max-width:620px}
+.chips{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
+.chips button{font-family:'Nunito';font-size:13.5px;font-weight:700;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.7);color:var(--ink);cursor:pointer;transition:.2s}
+.chips button.on{background:var(--accent);color:#fff;border-color:transparent}
+/* toolbar */
+.toolbar{display:flex;gap:12px;margin:22px 0 18px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:220px;background:rgba(255,255,255,.7);border:1.5px solid var(--line);border-radius:14px;padding:12px 16px;font-size:15px;font-family:'Nunito';font-weight:600;color:var(--ink);backdrop-filter:blur(8px)}
+.toggle{display:flex;background:rgba(255,255,255,.7);border:1.5px solid var(--line);border-radius:14px;padding:4px;backdrop-filter:blur(8px)}
+.toggle button{border:none;background:none;padding:8px 14px;border-radius:10px;font-size:17px;cursor:pointer;color:var(--gray)}
+.toggle button.on{background:var(--accent);color:#fff}
+.notesbtn{font-family:'Baloo 2';background:var(--accent);color:#fff;font-weight:700;font-size:14.5px;padding:12px 20px;border-radius:14px;border:none;cursor:pointer;display:flex;gap:8px;align-items:center;box-shadow:0 8px 20px -6px rgba(91,75,224,.6)}
+.count{font-size:14px;color:var(--gray);margin:4px 0 16px;font-weight:700}
+/* liquid glass cards */
+#list.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+#list.list{display:flex;flex-direction:column;gap:10px}
+#list.grid .row{display:none}#list.list .card{display:none}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.55),rgba(255,255,255,.32));backdrop-filter:url(#liquid) blur(3px) saturate(1.8) brightness(1.06);-webkit-backdrop-filter:blur(10px) saturate(1.6);border:1px solid rgba(255,255,255,.85);border-radius:20px;padding:20px;transition:.25s;box-shadow:0 12px 36px -20px rgba(13,15,28,.3),inset 0 1px 1px rgba(255,255,255,.9)}
+.card:hover{transform:translateY(-4px)}
+.card .ctop{display:flex;justify-content:space-between;align-items:flex-start}
+.en{font-weight:800;font-size:20px;color:var(--accent)}
+.en::after{content:'';display:block;width:28px;height:3px;border-radius:3px;background:var(--accent);opacity:.5;margin-top:5px}
+.tr{font-size:15px;color:#3f3a5e;font-weight:700;margin-top:11px}
+.ex{margin-top:12px;background:rgba(238,240,255,.6);border-left:3px solid var(--accent);border-radius:10px;padding:11px 12px}
+.ex .een{font-size:13px;color:#2a2348;font-weight:600;line-height:1.45}
+.ex .etr{font-size:12.5px;color:var(--gray);margin-top:4px;line-height:1.4}
+.star{font-size:20px;color:#cfc8ec;cursor:pointer}.star.on{color:#f5b301}
+.row{background:rgba(255,255,255,.6);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.8);border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:16px}
+.row .en{font-size:16px;min-width:180px}.row .en::after{display:none}
+.row .tr{margin-top:0;flex:1}.row .star{margin-left:auto}
+/* notes drawer (liquid glass) */
+.scrim{position:fixed;inset:0;background:rgba(13,15,28,.35);opacity:0;pointer-events:none;transition:.3s;z-index:60}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100%;width:430px;max-width:92vw;z-index:70;transform:translateX(100%);transition:.35s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;
+ background:linear-gradient(160deg,rgba(255,255,255,.82),rgba(255,255,255,.7));backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6);box-shadow:-20px 0 60px rgba(13,15,28,.25);border-left:1px solid rgba(255,255,255,.7)}
+.drawer.open{transform:none}
+.dhead{padding:20px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,.05)}
+.dhead .t{font-family:'Baloo 2';font-weight:800;font-size:19px}
+.dhead .t .ac{color:var(--accent)}.dhead .x{font-size:26px;cursor:pointer;color:var(--gray)}
+.dmeta{display:flex;justify-content:space-between;padding:10px 22px;font-size:12.5px;color:var(--gray)}
+.dmeta .saved{color:#16a34a;font-weight:700}
+.editor{flex:1;padding:6px 22px 16px}
+.editor textarea{width:100%;height:100%;border:none;outline:none;resize:none;font-size:16px;line-height:30px;color:#2a2348;font-family:'Nunito';font-weight:600;background:repeating-linear-gradient(transparent,transparent 29px,rgba(91,75,224,.12) 29px,rgba(91,75,224,.12) 30px)}
+.dfoot{padding:16px 22px;border-top:1px solid rgba(0,0,0,.05);display:flex;gap:10px}
+.dfoot .pdf{flex:1;font-family:'Baloo 2';background:var(--accent);color:#fff;font-weight:700;font-size:15px;padding:14px;border-radius:13px;border:none;cursor:pointer}
+.dfoot .clr{background:rgba(255,255,255,.7);border:1.5px solid var(--line);color:var(--gray);font-weight:700;font-size:14px;padding:14px 18px;border-radius:13px;cursor:pointer}
+/* zengin notlar */
+.drawer .rz{position:absolute;left:0;top:0;width:12px;height:100%;cursor:ew-resize;z-index:5}
+.drawer .rz::after{content:'';position:absolute;left:3px;top:50%;transform:translateY(-50%);width:4px;height:50px;border-radius:3px;background:rgba(91,75,224,.4)}
+.drawer.max{width:96vw!important}
+.dh-actions{display:flex;gap:14px;align-items:center}
+.dh-actions .mx{font-size:17px;cursor:pointer;color:var(--gray)}
+.tabs{display:flex;gap:8px;padding:0 22px 4px}
+.tabs button{flex:1;font-family:'Baloo 2';font-weight:700;font-size:15px;padding:9px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.6);color:var(--gray);cursor:pointer}
+.tabs button.on{background:var(--accent);color:#fff;border-color:transparent}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 22px}
+.tools select{font-family:'Nunito';font-weight:700;font-size:13px;border:1.5px solid var(--line);border-radius:9px;padding:7px 8px;background:#fff}
+.tools .tbtn{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;cursor:pointer;font-size:14px;font-weight:800;color:var(--ink)}
+.tools .tbtn.on{background:var(--accent);color:#fff;border-color:transparent}
+.sw{display:flex;gap:7px;align-items:center}
+.sw i{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.12);transition:.12s}
+.sw i.on{transform:scale(1.2);box-shadow:0 0 0 2px var(--accent)}
+.brush{display:flex;gap:9px;align-items:center}
+.brush i{display:inline-block;border-radius:50%;background:var(--ink);cursor:pointer;opacity:.35}
+.brush i.on{opacity:1;outline:2px solid var(--accent);outline-offset:2px}
+.surface{flex:1;position:relative;margin:6px 22px 0;border-radius:12px;overflow:hidden;border:1px solid rgba(91,75,224,.12)}
+.surface textarea{position:absolute;inset:0;width:100%;height:100%;border:none;outline:none;resize:none;padding:8px 6px;font-family:'Nunito';line-height:30px;background:repeating-linear-gradient(transparent,transparent 29px,rgba(91,75,224,.12) 29px,rgba(91,75,224,.12) 30px)}
+.surface canvas{position:absolute;inset:0;touch-action:none;cursor:crosshair;background:rgba(255,255,255,.4)}
+/* zengin metin editoru */
+.rtb{display:flex;flex-wrap:wrap;gap:5px;align-items:center;padding:6px 18px}
+.rtb select{font-family:'Nunito';font-weight:700;font-size:12.5px;border:1.5px solid var(--line);border-radius:8px;padding:6px 5px;background:#fff;cursor:pointer}
+.rtb button{min-width:30px;height:30px;border:1.5px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:14px;font-weight:800;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;padding:0 7px}
+.rtb button:hover{border-color:var(--accent)}
+.rtb .sep{width:1px;height:22px;background:var(--line);margin:0 2px}
+.rtb .sw i{width:18px;height:18px}
+.ed{position:absolute;inset:0;overflow:auto;padding:12px 14px;outline:none;font-family:'Nunito';font-weight:600;font-size:16px;line-height:1.6;color:#2a2348;background:#fff}
+.ed:empty:before{content:attr(data-ph);color:#9b94b8}
+.ed h1{font-family:'Baloo 2';font-size:26px;margin:6px 0}
+.ed h2{font-family:'Baloo 2';font-size:21px;margin:6px 0}
+.ed ul,.ed ol{margin:6px 0 6px 24px}
+.ed .todo{display:flex;gap:8px;align-items:center}
+.ed.lined{background:#fff repeating-linear-gradient(transparent,transparent 31px,rgba(91,75,224,.13) 31px,rgba(91,75,224,.13) 32px)}
+.ed.grid{background:#fff;background-image:linear-gradient(rgba(91,75,224,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(91,75,224,.1) 1px,transparent 1px);background-size:26px 26px}
+.ed.dots{background:#fff;background-image:radial-gradient(rgba(91,75,224,.25) 1.5px,transparent 1.5px);background-size:24px 24px}
+/* renk secici (4 hizli + acilir palet + ozel renk) */
+.cp{position:relative;display:flex;gap:5px;align-items:center}
+.cp .quick{display:flex;gap:5px}
+.cp .quick i{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.18)}
+.cp .quick i:hover{transform:scale(1.15)}
+.cp .more{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--gray)}
+.cp .pop{position:absolute;top:34px;left:0;z-index:30;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 36px rgba(13,15,28,.2);padding:12px;display:none;width:212px}
+.cp.open .pop{display:block}
+.cp .pop .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.cp .pop .grid i{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.14)}
+.cp .pop .grid i:hover{transform:scale(1.12)}
+.cp .pop .custom{display:flex;align-items:center;gap:9px;margin-top:11px;border-top:1px solid var(--line);padding-top:11px;font-size:12.5px;color:var(--gray);font-weight:700}
+.cp .pop .custom input[type=color]{width:34px;height:30px;border:1.5px solid var(--line);border-radius:8px;background:none;cursor:pointer;padding:2px}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--gray);font-size:14px;text-align:center;margin-top:50px}
+@media(max-width:880px){.links{display:none}#list.grid{grid-template-columns:1fr}.phead h1{font-size:28px}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="20" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="g"/><feBlend in="SourceGraphic" in2="g"/></filter>
+<filter id="liquid" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.007 0.010" numOctaves="2" seed="11" result="n"/><feGaussianBlur in="n" stdDeviation="1.1" result="nb"/><feDisplacementMap in="SourceGraphic" in2="nb" scale="95" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs></svg>
+<div class="lava"><span class="ball b1"></span><span class="ball b2"></span><span class="ball b3"></span><span class="ball b4"></span><span class="ball b5"></span></div>
+<header><div class="nav">
+  <div class="brand"><span class="dot"></span> Çıkmış Kelimeler</div>
+  <nav class="links"><a href="anasayfa-final.html">Ana Sayfa</a><a class="on" href="#">Kelimeler</a><a href="#">Premium</a><a href="#" onclick="openNotes();return false">Notlarım</a></nav>
+  <a class="hbtn" href="#">Uygulamayı indir</a>
+</div></header>
+
+<div class="wrap">
+ <div class="phead">
+  <div class="crumb">Ana Sayfa › Kelimeler › Sağlık › 2023</div>
+  <h1>YÖKDİL 2023 <span class="ac">Sağlık</span> Çıkmış Kelimeler</h1>
+  <p>2023 YÖKDİL Sağlık oturumunda çıkmış kelimeler, anlamları ve akademik örnek cümleleriyle. Ücretsiz çalış, not al, PDF indir.</p>
+  <div class="chips"><button class="on">Sağlık</button><button>Fen</button><button>Sosyal</button><button>2025</button><button>2024</button><button class="on">2023</button><button>2022</button></div>
+ </div>
+ <div class="toolbar">
+  <input class="search" id="q" placeholder="🔍 Kelime ara…" oninput="render()">
+  <div class="toggle"><button id="bg" class="on" onclick="setView('grid')">⊞</button><button id="bl" onclick="setView('list')">☰</button></div>
+  <button class="notesbtn" onclick="openNotes()">📝 Notlarım</button>
+ </div>
+ <div class="count" id="cnt">43 kelime · 2023 Sağlık</div>
+ <div id="list" class="grid"></div>
+</div>
+
+<div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<aside class="drawer" id="drawer">
+ <div class="rz" id="rz"></div>
+ <div class="dhead"><span class="t">📝 Not<span class="ac">larım</span></span>
+   <div class="dh-actions"><span class="mx" onclick="toggleMax()" title="Büyüt / küçült">⛶</span><span class="x" onclick="closeNotes()">×</span></div></div>
+ <div class="tabs"><button id="tabW" class="on" onclick="setTab('w')">Yaz</button><button id="tabD" onclick="setTab('d')">Çiz</button></div>
+ <div class="tools rtb" id="toolsW">
+   <select id="ff" onchange="cmd('fontName',this.value)" title="Yazı tipi">
+     <option value="Nunito">Nunito</option><option value="Baloo 2">Baloo</option><option value="Georgia">Serif</option><option value="Courier New">Mono</option><option value="Comic Sans MS">El yazısı</option></select>
+   <select id="blk" onchange="cmd('formatBlock',this.value)" title="Stil / başlık">
+     <option value="P">Normal</option><option value="H1">Başlık 1</option><option value="H2">Başlık 2</option></select>
+   <select id="fs" onchange="cmd('fontSize',this.value)" title="Boyut">
+     <option value="2">Küçük</option><option value="3" selected>Orta</option><option value="5">Büyük</option><option value="7">Dev</option></select>
+   <span class="sep"></span>
+   <button onclick="cmd('bold')" title="Kalın"><b>B</b></button>
+   <button onclick="cmd('italic')" title="İtalik"><i>I</i></button>
+   <button onclick="cmd('underline')" title="Altı çizili"><u>U</u></button>
+   <button onclick="cmd('strikeThrough')" title="Üstü çizili"><s>S</s></button>
+   <span class="sep"></span>
+   <button onclick="cmd('insertUnorderedList')" title="Madde listesi">•</button>
+   <button onclick="cmd('insertOrderedList')" title="Numaralı liste">1.</button>
+   <button onclick="addTodo()" title="Yapılacak">☑</button>
+   <span class="sep"></span>
+   <button onclick="cmd('justifyLeft')" title="Sola">⯇</button>
+   <button onclick="cmd('justifyCenter')" title="Ortala">≡</button>
+   <button onclick="cmd('justifyRight')" title="Sağa">⯈</button>
+   <span class="sep"></span>
+   <span class="sw" id="swT" title="Yazı rengi"></span>
+   <span class="sw" id="swH" title="Fosforlu vurgu"></span>
+   <span class="sep"></span>
+   <select id="paper" onchange="setPaper(this.value)" title="Kağıt">
+     <option value="plain">Düz</option><option value="lined">Çizgili</option><option value="grid">Kareli</option><option value="dots">Noktalı</option></select>
+   <button onclick="cmd('removeFormat')" title="Biçimi temizle">⌫</button>
+ </div>
+ <div class="tools" id="toolsD" style="display:none">
+   <div class="sw" id="swD"></div>
+   <div class="brush" id="brD"></div>
+   <button class="tbtn" id="erB" onclick="toggleEraser()">🧽 Silgi</button>
+ </div>
+ <div class="surface" id="surf">
+   <div class="ed" id="ed" contenteditable="true" data-ph="Çalışırken not al… başlık koy, renklendir, liste yap, çiz"></div>
+   <canvas id="cv" style="display:none"></canvas>
+ </div>
+ <div class="dmeta" style="padding:8px 22px 0"><span id="wc">0 kelime</span><span class="saved">✓ kaydedildi</span></div>
+ <div class="dfoot"><button class="pdf" onclick="dlPDF()">⬇ PDF indir</button><button class="clr" onclick="clearCur()">Temizle</button></div>
+</aside>
+
+<footer>© 2026 Çıkmış Kelimeler · destekcikmis@gmail.com</footer>
+
+<script>
+const WORDS=[{"en": "enrichment", "tr": "zenginleşme / zenginleştirme", "ex_en": "Environmental enrichment has been shown to enhance neuroplasticity and cognitive function in animal models of neurodegenerative disease.", "ex_tr": "Çevresel zenginleştirmenin, nörodejeneratif hastalık hayvan modellerinde nöroplastisiteyi ve bilişsel işlevi artırdığı gösterilmiştir."}, {"en": "association", "tr": "birlik / birleştirme", "ex_en": "A statistically significant association was observed between prolonged sedentary behavior and increased cardiovascular mortality.", "ex_tr": "Uzun süreli hareketsiz davranış ile artmış kardiyovasküler mortalite arasında istatistiksel olarak anlamlı bir ilişki gözlemlenmiştir."}, {"en": "proposal", "tr": "öneri / teklif", "ex_en": "The proposal to integrate telemedicine services into primary care was endorsed by the national health advisory board.", "ex_tr": "Teletıp hizmetlerinin birinci basamak sağlık hizmetlerine entegre edilmesine yönelik teklif, ulusal sağlık danışma kurulu tarafından onaylanmıştır."}, {"en": "advent", "tr": "icat / buluş / ilerleyiş", "ex_en": "The advent of mRNA vaccine technology has revolutionized the field of immunology and pandemic preparedness.", "ex_tr": "mRNA aşı teknolojisinin ortaya çıkışı, immünoloji ve pandemi hazırlığı alanında devrim yaratmıştır."}, {"en": "resolution", "tr": "kararlılık / azim", "ex_en": "The resolution of inflammatory markers following treatment indicated a favorable clinical response to the intervention.", "ex_tr": "Tedavi sonrasında inflamatuar belirteçlerin çözülmesi, müdahaleye olumlu bir klinik yanıt olduğunu göstermiştir."}, {"en": "exploitation", "tr": "istismar / kötüye kullanma", "ex_en": "The exploitation of vulnerable populations in unregulated clinical trials raises profound ethical concerns.", "ex_tr": "Düzenlenmemiş klinik araştırmalarda savunmasız popülasyonların istismarı, derin etik kaygıları gündeme getirmektedir."}, {"en": "diversion", "tr": "sapma / saptırma", "ex_en": "Prescription opioid diversion has been identified as a significant contributor to substance abuse epidemics in several countries.", "ex_tr": "Reçeteli opioid sapması, birçok ülkede madde bağımlılığı salgınlarına önemli bir katkıda bulunan faktör olarak tanımlanmıştır."}, {"en": "fragmentation", "tr": "ufalanma / parçalanma / parçalama", "ex_en": "Fragmentation of healthcare delivery systems often leads to gaps in continuity of care for patients with chronic conditions.", "ex_tr": "Sağlık hizmeti sunum sistemlerinin parçalanması, kronik rahatsızlığı olan hastaların bakım sürekliliğinde boşluklara yol açmaktadır."}, {"en": "distinction", "tr": "ayrım", "ex_en": "The distinction between benign and malignant tumors is critical for determining the appropriate course of treatment.", "ex_tr": "İyi huylu ve kötü huylu tümörler arasındaki ayrım, uygun tedavi sürecinin belirlenmesi için kritik öneme sahiptir."}, {"en": "supervision", "tr": "denetim / gözetim", "ex_en": "Directly observed therapy under clinical supervision has proven effective in improving tuberculosis treatment adherence.", "ex_tr": "Klinik gözetim altında doğrudan gözlemlenen tedavi, tüberküloz tedavisine uyumu artırmada etkili olduğu kanıtlanmıştır."}, {"en": "extraction", "tr": "çıkartma / çıkarma", "ex_en": "The extraction of bioactive compounds from medicinal plants has yielded several promising candidates for drug development.", "ex_tr": "Tıbbi bitkilerden biyoaktif bileşiklerin ekstraksiyonu, ilaç geliştirme için birçok umut verici aday ortaya çıkarmıştır."}, {"en": "mitigation", "tr": "yatıştırma / azaltma / kısıtlama", "ex_en": "The mitigation of adverse drug reactions requires systematic pharmacovigilance and timely reporting by healthcare professionals.", "ex_tr": "Advers ilaç reaksiyonlarının azaltılması, sistematik farmakovijilans ve sağlık profesyonelleri tarafından zamanında bildirim yapılmasını gerektirmektedir."}, {"en": "alteration", "tr": "değiştirme / değişim", "ex_en": "Epigenetic alterations in tumor suppressor genes have been implicated in the pathogenesis of several types of cancer.", "ex_tr": "Tümör baskılayıcı genlerdeki epigenetik değişiklikler, birçok kanser türünün patogenezinde rol oynamaktadır."}, {"en": "interpretation", "tr": "yorum", "ex_en": "The interpretation of radiological findings requires extensive training and familiarity with anatomical variations.", "ex_tr": "Radyolojik bulguların yorumlanması, kapsamlı eğitim ve anatomik varyasyonlara aşinalık gerektirmektedir."}, {"en": "compensation", "tr": "tazminat / telafi", "ex_en": "Cardiac compensation mechanisms may initially mask the severity of heart failure before clinical decompensation occurs.", "ex_tr": "Kardiyak kompansasyon mekanizmaları, klinik dekompansasyon oluşmadan önce kalp yetmezliğinin ciddiyetini başlangıçta maskeleyebilir."}, {"en": "adversity", "tr": "güçlük / sıkıntı / zor durum", "ex_en": "Childhood adversity has been strongly linked to the development of chronic mental health disorders in adulthood.", "ex_tr": "Çocukluk çağı zorlukları, yetişkinlikte kronik ruh sağlığı bozukluklarının gelişimi ile güçlü bir şekilde ilişkilendirilmiştir."}, {"en": "abstention", "tr": "imtina / sakınma / çekinme", "ex_en": "Abstention from alcohol consumption during pregnancy is strongly recommended to prevent fetal alcohol spectrum disorders.", "ex_tr": "Fetal alkol spektrum bozukluklarını önlemek için gebelik döneminde alkol tüketiminden kaçınılması şiddetle tavsiye edilmektedir."}, {"en": "accuracy", "tr": "doğruluk / kesinlik", "ex_en": "The diagnostic accuracy of polymerase chain reaction testing exceeds that of conventional serological assays for viral detection.", "ex_tr": "Polimeraz zincir reaksiyonu testinin tanısal doğruluğu, viral tespit için geleneksel serolojik analizlerin doğruluğunu aşmaktadır."}, {"en": "alleviation", "tr": "hafifletme / rahatlatma", "ex_en": "The alleviation of chronic pain through multimodal therapeutic approaches has gained prominence in contemporary medicine.", "ex_tr": "Çok modlu terapötik yaklaşımlar yoluyla kronik ağrının hafifletilmesi, çağdaş tıpta öne çıkmıştır."}, {"en": "acquisition", "tr": "kazanç / edinim", "ex_en": "The acquisition of antimicrobial resistance genes through horizontal gene transfer poses a major threat to global public health.", "ex_tr": "Yatay gen transferi yoluyla antimikrobiyal direnç genlerinin edinilmesi, küresel halk sağlığı için büyük bir tehdit oluşturmaktadır."}, {"en": "undeniable", "tr": "inkar edilemez", "ex_en": "The undeniable link between tobacco use and lung carcinoma has been established through decades of epidemiological research.", "ex_tr": "Tütün kullanımı ile akciğer karsinomu arasındaki inkar edilemez bağlantı, on yıllarca süren epidemiyolojik araştırmalarla ortaya konmuştur."}, {"en": "irreversible", "tr": "ters çevrilemez", "ex_en": "Prolonged ischemia may result in irreversible damage to myocardial tissue, necessitating prompt revascularization.", "ex_tr": "Uzun süreli iskemi, miyokard dokusunda geri dönüşü olmayan hasara yol açabilir ve acil revaskülarizasyon gerektirebilir."}, {"en": "inconsistent", "tr": "istikrarsız / tutarsız", "ex_en": "Inconsistent findings across clinical trials have hindered the establishment of definitive treatment guidelines for this condition.", "ex_tr": "Klinik araştırmalar arasındaki tutarsız bulgular, bu durum için kesin tedavi kılavuzlarının oluşturulmasını engellemiştir."}, {"en": "absolute", "tr": "tam / kesin / tüm", "ex_en": "The absolute risk reduction associated with statin therapy was more pronounced in patients with pre-existing cardiovascular disease.", "ex_tr": "Statin tedavisi ile ilişkili mutlak risk azalması, önceden mevcut kardiyovasküler hastalığı olan hastalarda daha belirgin olmuştur."}, {"en": "fundamental", "tr": "esas / temel / ana", "ex_en": "Understanding the fundamental mechanisms of cellular apoptosis is essential for advancing cancer therapeutics.", "ex_tr": "Hücresel apoptozun temel mekanizmalarının anlaşılması, kanser terapötiklerini ilerletmek için gereklidir."}, {"en": "descriptive", "tr": "betimsel / tanımlayıcı", "ex_en": "A descriptive epidemiological study was conducted to characterize the demographic distribution of the disease in the region.", "ex_tr": "Bölgedeki hastalığın demografik dağılımını karakterize etmek için tanımlayıcı bir epidemiyolojik çalışma yürütülmüştür."}, {"en": "complicated", "tr": "karmaşık / muğlak", "ex_en": "The clinical management of complicated urinary tract infections requires culture-guided antimicrobial therapy.", "ex_tr": "Komplike üriner sistem enfeksiyonlarının klinik yönetimi, kültür rehberliğinde antimikrobiyal tedavi gerektirmektedir."}, {"en": "feasible", "tr": "uygulanabilir / olası", "ex_en": "The pilot study demonstrated that large-scale implementation of the community-based screening program is feasible.", "ex_tr": "Pilot çalışma, toplum tabanlı tarama programının geniş ölçekli uygulamasının uygulanabilir olduğunu göstermiştir."}, {"en": "unintelligible", "tr": "anlaşılmaz", "ex_en": "Unintelligible handwriting on prescriptions has been identified as a contributing factor to medication dispensing errors.", "ex_tr": "Reçetelerdeki okunamaz el yazısı, ilaç dağıtım hatalarına katkıda bulunan bir faktör olarak tanımlanmıştır."}, {"en": "insufficient", "tr": "yetersiz", "ex_en": "Insufficient sample sizes in preliminary studies may lead to underpowered analyses and inconclusive results.", "ex_tr": "Ön çalışmalardaki yetersiz örneklem büyüklükleri, düşük güçlü analizlere ve sonuçsuz bulgulara yol açabilir."}, {"en": "inaccessible", "tr": "ulaşılamaz / erişilemez", "ex_en": "Essential healthcare services remain inaccessible to millions of individuals living in remote and underserved regions.", "ex_tr": "Temel sağlık hizmetleri, uzak ve yetersiz hizmet alan bölgelerde yaşayan milyonlarca birey için erişilemez olmaya devam etmektedir."}, {"en": "unattainable", "tr": "ele geçirilemez", "ex_en": "Complete eradication of the pathogen proved unattainable despite aggressive antimicrobial combination therapy.", "ex_tr": "Agresif antimikrobiyal kombinasyon tedavisine rağmen patojenin tamamen eradikasyonu ulaşılamaz olduğu kanıtlanmıştır."}, {"en": "promptly", "tr": "acil olarak / hemen", "ex_en": "Anaphylactic reactions must be treated promptly with intramuscular epinephrine to prevent fatal cardiovascular collapse.", "ex_tr": "Anafilaktik reaksiyonlar, ölümcül kardiyovasküler kolapsı önlemek için intramusküler epinefrin ile derhal tedavi edilmelidir."}, {"en": "accurately", "tr": "doğru / tam olarak", "ex_en": "The ability to accurately quantify viral load is critical for monitoring the efficacy of antiviral treatment regimens.", "ex_tr": "Viral yükü doğru bir şekilde ölçme yeteneği, antiviral tedavi rejimlerinin etkinliğini izlemek için kritik öneme sahiptir."}, {"en": "reluctantly", "tr": "isteksizce", "ex_en": "Patients with chronic pain reluctantly accepted long-term opioid therapy when alternative analgesic strategies proved ineffective.", "ex_tr": "Kronik ağrısı olan hastalar, alternatif analjezik stratejiler etkisiz kaldığında uzun süreli opioid tedavisini isteksizce kabul etmişlerdir."}, {"en": "hinder", "tr": "engellemek", "ex_en": "Socioeconomic barriers continue to hinder equitable access to preventive healthcare services in marginalized communities.", "ex_tr": "Sosyoekonomik engeller, dezavantajlı topluluklarda koruyucu sağlık hizmetlerine eşit erişimi engellemeye devam etmektedir."}, {"en": "validate", "tr": "doğrulamak / geçerli kılmak", "ex_en": "Multicenter clinical trials are essential to validate the safety and efficacy of novel therapeutic interventions.", "ex_tr": "Çok merkezli klinik araştırmalar, yeni terapötik müdahalelerin güvenliğini ve etkinliğini doğrulamak için gereklidir."}, {"en": "facilitate", "tr": "kolaylaştırmak", "ex_en": "Growth factors facilitate tissue regeneration by promoting cellular proliferation and angiogenesis at the site of injury.", "ex_tr": "Büyüme faktörleri, yaralanma bölgesinde hücresel proliferasyonu ve anjiyogenezi teşvik ederek doku rejenerasyonunu kolaylaştırmaktadır."}, {"en": "precede", "tr": "önce gelmek", "ex_en": "Prodromal symptoms often precede the acute onset of schizophrenia by several months or even years.", "ex_tr": "Prodromal semptomlar, şizofreninin akut başlangıcından genellikle birkaç ay hatta yıllar önce ortaya çıkmaktadır."}, {"en": "compile", "tr": "derlemek", "ex_en": "The investigators compiled data from over fifty cohort studies to conduct a comprehensive meta-analysis.", "ex_tr": "Araştırmacılar, kapsamlı bir meta-analiz yürütmek için elliden fazla kohort çalışmasından veri derlemiştir."}, {"en": "carry out", "tr": "yerine getirmek / uygulamak", "ex_en": "Randomized controlled trials must be carried out in accordance with established ethical guidelines and regulatory standards.", "ex_tr": "Randomize kontrollü çalışmalar, yerleşik etik kılavuzlara ve düzenleyici standartlara uygun olarak yürütülmelidir."}, {"en": "draw up", "tr": "düzenlemek / yazmak", "ex_en": "The clinical team drew up a comprehensive treatment protocol tailored to the individual needs of each patient.", "ex_tr": "Klinik ekip, her hastanın bireysel ihtiyaçlarına göre uyarlanmış kapsamlı bir tedavi protokolü hazırlamıştır."}, {"en": "pass down", "tr": "nesilden nesile aktarmak", "ex_en": "Genetic predispositions to certain hereditary disorders are passed down through successive generations via autosomal inheritance.", "ex_tr": "Belirli kalıtsal bozukluklara yönelik genetik yatkınlıklar, otozomal kalıtım yoluyla ardışık nesillere aktarılmaktadır."}];
+function star(){return '<span class="star" onclick="event.stopPropagation();this.classList.toggle(\'on\');this.textContent=this.classList.contains(\'on\')?\'★\':\'☆\'">☆</span>'}
+function render(){
+ const q=(document.getElementById('q').value||'').toLowerCase().trim();
+ const f=WORDS.filter(w=>!q||w.en.toLowerCase().includes(q)||w.tr.toLowerCase().includes(q));
+ document.getElementById('cnt').textContent=f.length+' kelime · 2023 Sağlık';
+ document.getElementById('list').innerHTML=f.map(w=>`
+  <div class="card"><div class="ctop"><div class="en">${w.en}</div>${star()}</div><div class="tr">${w.tr}</div>
+   <div class="ex"><div class="een">${w.ex_en}</div><div class="etr">${w.ex_tr}</div></div></div>
+  <div class="row"><div class="en">${w.en}</div><div class="tr">${w.tr}</div>${star()}</div>`).join('');
+}
+function setView(v){document.getElementById('list').className=v;document.getElementById('bg').classList.toggle('on',v=='grid');document.getElementById('bl').classList.toggle('on',v=='list')}
+function openNotes(){drawer.classList.add('open');scrim.classList.add('open')}
+function closeNotes(){drawer.classList.remove('open');scrim.classList.remove('open')}
+const ed=document.getElementById('ed'),cv=document.getElementById('cv'),surf=document.getElementById('surf'),dr=document.getElementById('drawer');
+// --- zengin metin ---
+ed.innerHTML=localStorage.getItem('cknote_html')||'';
+function save(){localStorage.setItem('cknote_html',ed.innerHTML);const w=ed.innerText.trim();document.getElementById('wc').textContent=(w?w.split(/\s+/).length:0)+' kelime'}
+function cmd(c,v){ed.focus();try{document.execCommand(c,false,v||null)}catch(e){}save()}
+function addTodo(){ed.focus();document.execCommand('insertHTML',false,'<div class="todo"><input type="checkbox" contenteditable="false"><span>&nbsp;yapılacak</span></div><div><br></div>');save()}
+function setPaper(v){ed.className='ed'+(v&&v!='plain'?' '+v:'');localStorage.setItem('cknote_paper',v)}
+const pap=localStorage.getItem('cknote_paper')||'plain';setPaper(pap);document.getElementById('paper').value=pap;
+ed.addEventListener('input',save);save();
+const PAL_TEXT=['#000000','#444444','#888888','#cccccc','#5b4be0','#3a1f8f','#0e7fd6','#00b8d4','#1aa251','#8bc34a','#f5b301','#e08a00','#e0364f','#d61f9b','#9c27b0','#795548','#2a2348','#ffffff'];
+const PAL_HL=['#fff59d','#ffe0b2','#ffccbc','#ffcdd2','#f8bbd0','#e1bee7','#d1c4e9','#c5cae9','#bbdefb','#b2ebf2','#b2dfdb','#c8e6c9'];
+function colorPicker(host,palette,quick,onPick){
+  host.classList.add('cp');host.innerHTML='';
+  const q=document.createElement('div');q.className='quick';
+  quick.forEach(c=>{const i=document.createElement('i');i.style.background=c;i.title=c;i.onclick=()=>onPick(c);q.appendChild(i)});
+  const more=document.createElement('button');more.type='button';more.className='more';more.textContent='▾';
+  const pop=document.createElement('div');pop.className='pop';
+  const grid=document.createElement('div');grid.className='grid';
+  palette.forEach(c=>{const i=document.createElement('i');i.style.background=c;i.title=c;i.onclick=()=>{onPick(c);host.classList.remove('open')};grid.appendChild(i)});
+  const cust=document.createElement('div');cust.className='custom';
+  const inp=document.createElement('input');inp.type='color';inp.value='#5b4be0';inp.oninput=()=>onPick(inp.value);
+  const lbl=document.createElement('span');lbl.textContent='Özel renk oluştur';
+  cust.appendChild(inp);cust.appendChild(lbl);pop.appendChild(grid);pop.appendChild(cust);
+  host.appendChild(q);host.appendChild(more);host.appendChild(pop);
+  more.onclick=e=>{e.stopPropagation();document.querySelectorAll('.cp.open').forEach(x=>{if(x!=host)x.classList.remove('open')});host.classList.toggle('open')};
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.cp'))document.querySelectorAll('.cp.open').forEach(x=>x.classList.remove('open'))});
+colorPicker(document.getElementById('swT'),PAL_TEXT,['#2a2348','#5b4be0','#e0364f','#1aa251'],c=>cmd('foreColor',c));
+colorPicker(document.getElementById('swH'),PAL_HL,['#fff59d','#b9f6ca','#ffcdd2','#bbdefb'],c=>cmd('hiliteColor',c));
+// --- cizim ---
+const ctx=cv.getContext('2d');let drawing=false,dcolor='#5b4be0',dsize=5,erase=false,last=null;
+function fitCanvas(){const r=surf.getBoundingClientRect();if(!r.width)return;const old=cv.width?cv.toDataURL():null;cv.width=r.width;cv.height=r.height;if(old){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0);im.src=old}else restoreDraw()}
+function pos(e){const r=cv.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+cv.addEventListener('pointerdown',e=>{drawing=true;last=pos(e);cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{if(!drawing)return;const p=pos(e);ctx.lineCap='round';ctx.lineJoin='round';ctx.lineWidth=erase?dsize*4:dsize;ctx.globalCompositeOperation=erase?'destination-out':'source-over';ctx.strokeStyle=dcolor;ctx.beginPath();ctx.moveTo(last.x,last.y);ctx.lineTo(p.x,p.y);ctx.stroke();last=p});
+addEventListener('pointerup',()=>{if(drawing){drawing=false;saveDraw()}});
+function saveDraw(){try{localStorage.setItem('ckdraw',cv.toDataURL())}catch(e){}}
+function restoreDraw(){const d=localStorage.getItem('ckdraw');if(d){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0);im.src=d}}
+colorPicker(document.getElementById('swD'),PAL_TEXT,['#5b4be0','#2a2348','#e0364f','#1aa251'],c=>{dcolor=c;erase=false;document.getElementById('erB').classList.remove('on')});
+const brD=document.getElementById('brD');[3,5,11].forEach((s,i)=>{const e=document.createElement('i');e.style.width=e.style.height=(8+i*5)+'px';if(i==1)e.className='on';e.onclick=()=>{dsize=s;erase=false;document.getElementById('erB').classList.remove('on');[...brD.children].forEach(x=>x.classList.remove('on'));e.classList.add('on')};brD.appendChild(e)});
+function toggleEraser(){erase=!erase;document.getElementById('erB').classList.toggle('on',erase)}
+// --- sekmeler ---
+let tab='w';
+function setTab(t){tab=t;document.getElementById('tabW').classList.toggle('on',t=='w');document.getElementById('tabD').classList.toggle('on',t=='d');
+ document.getElementById('toolsW').style.display=t=='w'?'flex':'none';document.getElementById('toolsD').style.display=t=='d'?'flex':'none';
+ ed.style.display=t=='w'?'block':'none';cv.style.display=t=='d'?'block':'none';if(t=='d')requestAnimationFrame(fitCanvas)}
+// --- resize + tam ekran ---
+const rz=document.getElementById('rz');let rzon=false;
+rz.addEventListener('pointerdown',e=>{rzon=true;e.preventDefault()});
+addEventListener('pointermove',e=>{if(!rzon)return;let w=Math.max(320,Math.min(innerWidth*0.96,innerWidth-e.clientX));dr.style.width=w+'px';if(tab=='d')fitCanvas()});
+addEventListener('pointerup',()=>rzon=false);
+function toggleMax(){dr.classList.toggle('max');if(tab=='d')setTimeout(fitCanvas,60)}
+// --- temizle + pdf ---
+function clearCur(){if(tab=='w'){if(confirm('Yazı silinsin mi?')){ed.innerHTML='';save()}}else{if(confirm('Çizim silinsin mi?')){ctx.clearRect(0,0,cv.width,cv.height);saveDraw()}}}
+async function dlPDF(){const {jsPDF}=window.jspdf;const doc=new jsPDF('p','mm','a4');const W=180;let y=16;
+ doc.setFontSize(16);doc.text('Notlarim - Cikmis Kelimeler',14,y);y=26;
+ if(ed.innerText.trim()){try{const c=await html2canvas(ed,{backgroundColor:'#ffffff',scale:2,height:ed.scrollHeight,windowHeight:ed.scrollHeight});const h=c.height*W/c.width;doc.addImage(c.toDataURL('image/png'),'PNG',14,y,W,Math.min(h,250));y+=Math.min(h,250)+8}catch(e){}}
+ const d=localStorage.getItem('ckdraw');if(d){if(y>150){doc.addPage();y=16}try{doc.addImage(d,'PNG',14,y,W,W*0.6)}catch(e){}}
+ doc.save('cikmis-kelimeler-notlarim.pdf')}
+const _open=openNotes;openNotes=function(){_open();if(tab=='d')setTimeout(fitCanvas,360)};
+render();
+// lava fizik
+const balls=[...document.querySelectorAll('.lava .ball')].map(el=>({el,w:el.offsetWidth,bx:el.offsetLeft,by:el.offsetTop,ax:16+Math.random()*22,ay:55+Math.random()*55,sx:0.00022+Math.random()*0.0003,sy:0.0003+Math.random()*0.0003,ph:Math.random()*6.28,rx:0,ry:0,sc:0}));
+let mX=-9999,mY=-9999;addEventListener('mousemove',e=>{mX=e.clientX;mY=e.clientY},{passive:true});addEventListener('mouseout',()=>{mX=-9999;mY=-9999});
+const R=320,F=120,SW=0.65;
+function frame(t){balls.forEach(b=>{const ax=Math.sin(t*b.sx+b.ph)*b.ax,ay=Math.cos(t*b.sy+b.ph)*b.ay,cx=b.bx+b.w/2+ax,cy=b.by+b.w/2+ay;let tx=0,ty=0,sc=0;const dx=cx-mX,dy=cy-mY,d=Math.hypot(dx,dy)||1;if(d<R){const k=(1-d/R),p=k*k*F,nx=dx/d,ny=dy/d;tx=nx*p-ny*p*SW;ty=ny*p+nx*p*SW;sc=k*0.16}b.rx+=(tx-b.rx)*0.06;b.ry+=(ty-b.ry)*0.06;b.sc+=(sc-b.sc)*0.07;b.el.style.transform=`translate(${ax+b.rx}px,${ay+b.ry}px) scale(${1+b.sc})`});requestAnimationFrame(frame)}
+requestAnimationFrame(frame);
+</script></body></html>

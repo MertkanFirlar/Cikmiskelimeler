@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',-apple-system,sans-serif;}
+  :root{
+    --royal:#2d1b69; --royal-deep:#0a0f2c; --gold:#f5c451; --gold-soft:#fde68a;
+    --ink:#1f1840; --muted:#6b6688; --paper:#fffdf6; --bg:#f5f3fb;
+  }
+  body{background:var(--bg);color:var(--ink);}
+
+  /* ── Header ── */
+  header.top{background:linear-gradient(135deg,#0a0f2c 0%,#1a1248 55%,#2d1b69 100%);color:#fff;padding:14px 26px;
+    display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:30;}
+  .logo{font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px;}
+  .logo .g{background:linear-gradient(180deg,#fde68a,#f5c451);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  nav.menu{display:flex;gap:22px;font-size:15px;font-weight:600;}
+  nav.menu a{color:rgba(255,255,255,.8);text-decoration:none;}
+  nav.menu a.active{color:var(--gold);}
+  .dl-btn{background:linear-gradient(180deg,#fde68a,#f5c451);color:#2d1b69;font-weight:700;font-size:14px;
+    padding:9px 16px;border-radius:999px;display:inline-flex;gap:7px;align-items:center;text-decoration:none;}
+
+  /* ── Page head ── */
+  .pagehead{background:linear-gradient(135deg,#1a1248,#2d1b69);color:#fff;padding:30px 26px 34px;}
+  .crumb{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:10px;}
+  .pagehead h1{font-size:30px;font-weight:800;line-height:1.15;}
+  .pagehead h1 .g{background:linear-gradient(180deg,#fde68a,#f5c451);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .pagehead p{color:rgba(255,255,255,.75);margin-top:8px;font-size:15px;max-width:640px;}
+  .chips{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+  .chips a{font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;text-decoration:none;
+    background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(245,196,81,.35);}
+  .chips a.on{background:linear-gradient(180deg,#fde68a,#f5c451);color:#2d1b69;border-color:transparent;}
+
+  /* ── Layout ── */
+  .layout{max-width:1180px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;}
+
+  /* ── Word cards ── */
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .count{font-size:14px;color:var(--muted);font-weight:600;}
+  .search{background:#fff;border:1.5px solid #e6e1f2;border-radius:12px;padding:9px 14px;font-size:14px;color:var(--muted);min-width:200px;}
+  .word{background:#fff;border:1px solid #ece8f6;border-radius:16px;padding:18px 20px;margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(45,27,105,.05);}
+  .word .wtop{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
+  .en{font-size:22px;font-weight:800;color:var(--royal);}
+  .en::after{content:'';display:block;width:34px;height:3px;border-radius:3px;background:linear-gradient(90deg,#f5c451,#fde68a);margin-top:5px;}
+  .tr{font-size:16px;color:#3f3a5e;font-weight:600;}
+  .star{color:#cfc8e6;font-size:20px;}
+  .ex{margin-top:14px;background:#fbf8ef;border-left:3px solid var(--gold);border-radius:8px;padding:11px 13px;}
+  .ex .een{font-size:14px;color:#2a2348;font-weight:500;line-height:1.45;}
+  .ex .etr{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45;}
+  .more{font-size:13px;color:var(--royal);font-weight:700;margin-top:10px;display:inline-block;}
+
+  /* ── Notes panel ── */
+  .notes{position:sticky;top:84px;background:var(--paper);border:1px solid #efe7cf;border-radius:18px;
+    box-shadow:0 8px 24px rgba(45,27,105,.08);overflow:hidden;}
+  .notes .nhead{background:linear-gradient(135deg,#2d1b69,#1a1248);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:9px;}
+  .notes .nhead .t{font-weight:800;font-size:16px;}
+  .notes .nhead .t .g{color:var(--gold);}
+  .notes .nbody{padding:16px 18px;}
+  .pad{background:repeating-linear-gradient(transparent,transparent 31px,#eee4c8 31px,#eee4c8 32px);
+    min-height:230px;border:1px solid #efe7cf;border-radius:10px;padding:8px 12px;font-size:15px;color:#3a3358;line-height:32px;}
+  .pad .ph{color:#b8b08e;}
+  .pad .line{color:#2a2348;}
+  .nbtns{display:flex;gap:10px;margin-top:14px;}
+  .nbtns .pdf{flex:1;background:linear-gradient(180deg,#fde68a,#f5c451);color:#2d1b69;font-weight:700;font-size:14px;
+    padding:12px;border-radius:11px;display:flex;align-items:center;justify-content:center;gap:8px;border:none;}
+  .nbtns .clr{background:#fff;border:1.5px solid #e6e1f2;color:var(--muted);font-weight:600;font-size:14px;padding:12px 16px;border-radius:11px;}
+  .ntip{font-size:12px;color:var(--muted);margin-top:10px;text-align:center;}
+  .appcta{margin-top:14px;background:rgba(45,27,105,.05);border:1px dashed #c9bff0;border-radius:12px;padding:13px;text-align:center;}
+  .appcta b{color:var(--royal);font-size:14px;}
+  .appcta span{display:block;font-size:12px;color:var(--muted);margin:3px 0 9px;}
+  .appcta a{background:#2d1b69;color:#fff;font-weight:700;font-size:13px;padding:9px 14px;border-radius:999px;text-decoration:none;display:inline-flex;gap:6px;align-items:center;}
+
+  /* floating notes button (mobile only) */
+  .fab{display:none;position:fixed;bottom:18px;right:18px;background:linear-gradient(180deg,#fde68a,#f5c451);
+    color:#2d1b69;font-weight:800;font-size:15px;padding:14px 20px;border-radius:999px;box-shadow:0 10px 24px rgba(45,27,105,.3);z-index:40;gap:8px;align-items:center;}
+
+  /* ── Responsive ── */
+  @media (max-width:980px){
+    .layout{grid-template-columns:1fr;}
+    .notes{display:none;}          /* mobil/tablet dar: panel gizli, FAB ile acilir */
+    .fab{display:inline-flex;}
+    nav.menu{display:none;}
+    .pagehead h1{font-size:25px;}
+    .en{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+  <header class="top">
+    <div class="logo">📚 <span>Çıkmış <span class="g">Kelimeler</span></span></div>
+    <nav class="menu">
+      <a href="#">Ana Sayfa</a>
+      <a href="#" class="active">Kelimeler</a>
+      <a href="#">Bağlaçlar</a>
+      <a href="#">Notlarım</a>
+    </nav>
+    <a class="dl-btn" href="#">▶ Uygulamayı İndir</a>
+  </header>
+
+  <section class="pagehead">
+    <div class="crumb">Ana Sayfa › Kelimeler › Sağlık › 2023</div>
+    <h1>YÖKDİL 2023 <span class="g">Sağlık</span> Çıkmış Kelimeler</h1>
+    <p>2023 YÖKDİL Sağlık oturumunda çıkmış kelimeler, anlamları ve akademik örnek cümleleriyle. Ücretsiz çalış, not al, PDF indir.</p>
+    <div class="chips">
+      <a class="on" href="#">Sağlık</a><a href="#">Fen</a><a href="#">Sosyal</a>
+      <a href="#">2025</a><a href="#">2024</a><a href="#">2023</a><a href="#">2022</a>
+    </div>
+  </section>
+
+  <div class="layout">
+    <!-- WORDS -->
+    <main>
+      <div class="toolbar">
+        <span class="count">128 kelime · 2023 Sağlık</span>
+        <div class="search">🔍 Kelime ara…</div>
+      </div>
+
+      <div class="word">
+        <div class="wtop"><div><div class="en">enrichment</div></div><span class="star">☆</span></div>
+        <div class="tr">zenginleşme / zenginleştirme</div>
+        <div class="ex">
+          <div class="een">Environmental <b>enrichment</b> has been shown to enhance neuroplasticity and cognitive function in animal models of neurodegenerative disease.</div>
+          <div class="etr">Çevresel zenginleştirmenin, nörodejeneratif hastalık hayvan modellerinde nöroplastisiteyi ve bilişsel işlevi artırdığı gösterilmiştir.</div>
+        </div>
+        <span class="more">+ 2 örnek cümle daha ▾</span>
+      </div>
+
+      <div class="word">
+        <div class="wtop"><div><div class="en">association</div></div><span class="star">★</span></div>
+        <div class="tr">birlik / birleştirme / ilişki</div>
+        <div class="ex">
+          <div class="een">A statistically significant <b>association</b> was observed between prolonged sedentary behavior and increased cardiovascular mortality.</div>
+          <div class="etr">Uzun süreli hareketsiz davranış ile artmış kardiyovasküler mortalite arasında istatistiksel olarak anlamlı bir ilişki gözlemlenmiştir.</div>
+        </div>
+        <span class="more">+ 2 örnek cümle daha ▾</span>
+      </div>
+
+      <div class="word">
+        <div class="wtop"><div><div class="en">proposal</div></div><span class="star">☆</span></div>
+        <div class="tr">öneri / teklif</div>
+        <div class="ex">
+          <div class="een">The <b>proposal</b> to integrate telemedicine services into primary care was endorsed by the national health advisory board.</div>
+          <div class="etr">Teletıp hizmetlerinin birinci basamak sağlık hizmetlerine entegre edilmesine yönelik teklif, ulusal sağlık danışma kurulu tarafından onaylanmıştır.</div>
+        </div>
+        <span class="more">+ 2 örnek cümle daha ▾</span>
+      </div>
+    </main>
+
+    <!-- NOTES -->
+    <aside class="notes">
+      <div class="nhead">📝 <span class="t">Not<span class="g">larım</span></span></div>
+      <div class="nbody">
+        <div class="pad">
+          <div class="line">enrichment → zenginleştirme (su + florür örneği)</div>
+          <div class="line">association = ilişki, sık çıkıyor!</div>
+          <div class="ph">Buraya yaz…</div>
+        </div>
+        <div class="nbtns">
+          <button class="pdf">⬇ PDF İndir</button>
+          <button class="clr">Temizle</button>
+        </div>
+        <div class="ntip">Notların tarayıcına kaydedilir · istediğinde PDF indir</div>
+        <div class="appcta">
+          <b>Oyunla pekiştir 🎯</b>
+          <span>Kelime Avı, Kamp Modu ve hatırlatmalar uygulamada</span>
+          <a href="#">▶ Google Play'den İndir</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <a class="fab" href="#">📝 Notlarım</a>
+</body>
+</html>

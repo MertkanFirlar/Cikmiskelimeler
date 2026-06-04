@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kelimeler — Çıkmış Kelimeler</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--royal:#3a1f8f;--royal2:#6d4bd8;--ink:#1a1340;--muted:#6b6690;--gold:#f5c451;--gold2:#fde68a;--bg:#f6f3ff;}
+body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;color:var(--ink);background:var(--bg);}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px;}
+
+header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(246,243,255,.75);border-bottom:1px solid rgba(109,75,216,.12);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:13px 22px;max-width:1080px;margin:0 auto;}
+.brand{font-family:'Sora';font-weight:800;font-size:19px;display:flex;gap:8px;align-items:center;}
+.brand .g{background:linear-gradient(90deg,#6d4bd8,#f5c451);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.cta{background:linear-gradient(135deg,#6d4bd8,#3a1f8f);color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:999px;text-decoration:none;}
+
+.phead{padding:30px 0 8px;}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.phead h1{font-family:'Sora';font-weight:800;font-size:34px;letter-spacing:-1px;}
+.phead h1 .g{background:linear-gradient(120deg,#6d4bd8,#f5c451);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.phead p{color:var(--muted);margin-top:8px;font-size:15px;max-width:600px;}
+.chips{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap;}
+.chips button{font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid rgba(109,75,216,.18);background:#fff;color:var(--ink);cursor:pointer;transition:.2s;}
+.chips button.on{background:linear-gradient(135deg,#6d4bd8,#3a1f8f);color:#fff;border-color:transparent;}
+
+.toolbar{display:flex;align-items:center;gap:12px;margin:22px 0 18px;flex-wrap:wrap;}
+.search{flex:1;min-width:200px;background:#fff;border:1.5px solid #e6e1f2;border-radius:14px;padding:12px 16px;font-size:15px;color:var(--muted);display:flex;gap:9px;align-items:center;}
+.toggle{display:flex;background:#fff;border:1.5px solid #e6e1f2;border-radius:14px;padding:4px;gap:3px;}
+.toggle button{border:none;background:none;padding:8px 13px;border-radius:10px;font-size:16px;cursor:pointer;color:var(--muted);font-weight:700;}
+.toggle button.on{background:linear-gradient(135deg,#6d4bd8,#3a1f8f);color:#fff;}
+.notesbtn{background:linear-gradient(135deg,#fde68a,#f5c451);color:#3a1f8f;font-weight:800;font-size:14px;padding:12px 18px;border-radius:14px;border:none;cursor:pointer;display:flex;gap:8px;align-items:center;box-shadow:0 8px 20px rgba(245,196,81,.4);}
+
+/* GRID */
+#list.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+#list.grid .row{display:none;}
+#list.list .card{display:none;}
+#list.list{display:flex;flex-direction:column;gap:10px;}
+
+.card{background:#fff;border:1px solid rgba(109,75,216,.08);border-radius:22px;padding:22px;box-shadow:0 8px 24px rgba(58,31,143,.05);transition:.25s;cursor:pointer;}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(58,31,143,.12);}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;}
+.card .en{font-family:'Sora';font-weight:800;font-size:21px;color:var(--royal);}
+.card .en::after{content:'';display:block;width:30px;height:3px;border-radius:3px;background:linear-gradient(90deg,#f5c451,#fde68a);margin-top:6px;}
+.card .tr{font-size:15px;color:#3f3a5e;font-weight:600;margin-top:12px;}
+.card .ex{margin-top:14px;background:#faf7ff;border-radius:12px;padding:12px;font-size:13px;color:var(--muted);line-height:1.5;border-left:3px solid var(--gold);}
+.star{font-size:20px;color:#d4cdec;cursor:pointer;transition:.2s;}
+.star.on{color:var(--gold);}
+
+/* LIST rows */
+.row{background:#fff;border:1px solid rgba(109,75,216,.08);border-radius:16px;padding:15px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 4px 14px rgba(58,31,143,.04);transition:.2s;}
+.row:hover{transform:translateX(4px);}
+.row .en{font-family:'Sora';font-weight:700;font-size:17px;color:var(--royal);min-width:170px;}
+.row .tr{font-size:15px;color:#3f3a5e;flex:1;}
+.row .star{margin-left:auto;}
+
+/* NOTES drawer */
+.scrim{position:fixed;inset:0;background:rgba(26,19,64,.4);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:.3s;z-index:60;}
+.scrim.open{opacity:1;pointer-events:auto;}
+.drawer{position:fixed;top:0;right:0;height:100%;width:420px;max-width:90vw;background:#fffdf7;z-index:70;
+  transform:translateX(100%);transition:.35s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;box-shadow:-16px 0 50px rgba(26,19,64,.25);}
+.drawer.open{transform:none;}
+.dhead{background:linear-gradient(135deg,#3a1f8f,#6d4bd8);color:#fff;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;}
+.dhead .t{font-family:'Sora';font-weight:800;font-size:19px;}
+.dhead .t .g{color:var(--gold);}
+.dhead .x{font-size:24px;cursor:pointer;opacity:.85;}
+.dmeta{display:flex;justify-content:space-between;align-items:center;padding:12px 22px;font-size:12.5px;color:var(--muted);border-bottom:1px solid #efe7cf;}
+.dmeta .saved{color:#16a34a;font-weight:700;display:flex;gap:6px;align-items:center;}
+.editor{flex:1;padding:18px 22px;}
+.editor textarea{width:100%;height:100%;border:none;outline:none;resize:none;font-size:16px;line-height:32px;color:#2a2348;
+  background:repeating-linear-gradient(transparent,transparent 31px,#efe7cf 31px,#efe7cf 32px);font-family:'Plus Jakarta Sans';}
+.dfoot{padding:16px 22px;border-top:1px solid #efe7cf;display:flex;gap:10px;}
+.dfoot .pdf{flex:1;background:linear-gradient(135deg,#fde68a,#f5c451);color:#3a1f8f;font-weight:800;font-size:15px;padding:14px;border-radius:13px;border:none;cursor:pointer;display:flex;justify-content:center;gap:8px;align-items:center;}
+.dfoot .clr{background:#fff;border:1.5px solid #e6e1f2;color:var(--muted);font-weight:600;font-size:14px;padding:14px 18px;border-radius:13px;cursor:pointer;}
+
+@media(max-width:880px){
+  #list.grid{grid-template-columns:1fr;}
+  .phead h1{font-size:26px;}
+}
+</style>
+</head>
+<body>
+<header><div class="nav">
+  <div class="brand">📚 <span>Çıkmış <span class="g">Kelimeler</span></span></div>
+  <a class="cta" href="#">▶ Uygulamayı İndir</a>
+</div></header>
+
+<div class="wrap">
+  <div class="phead">
+    <div class="crumb">Ana Sayfa › Kelimeler › Sağlık › 2023</div>
+    <h1>YÖKDİL 2023 <span class="g">Sağlık</span> Kelimeleri</h1>
+    <p>Çıkmış kelimeler, anlamları ve akademik örnek cümleleri. İstersen grid, istersen liste — not al, PDF indir.</p>
+    <div class="chips">
+      <button class="on">Sağlık</button><button>Fen</button><button>Sosyal</button>
+      <button>2025</button><button>2024</button><button class="on">2023</button><button>2022</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search">🔍 Kelime ara…</div>
+    <div class="toggle">
+      <button id="bGrid" class="on" onclick="setView('grid')">⊞</button>
+      <button id="bList" onclick="setView('list')">☰</button>
+    </div>
+    <button class="notesbtn" onclick="openNotes()">📝 Notlarım</button>
+  </div>
+
+  <div id="list" class="grid"></div>
+  <div style="height:50px"></div>
+</div>
+
+<!-- NOTES DRAWER -->
+<div class="scrim" id="scrim" onclick="closeNotes()"></div>
+<aside class="drawer" id="drawer">
+  <div class="dhead"><span class="t">📝 Not<span class="g">larım</span></span><span class="x" onclick="closeNotes()">×</span></div>
+  <div class="dmeta"><span id="wc">0 kelime</span><span class="saved">✓ otomatik kaydedildi</span></div>
+  <div class="editor"><textarea id="ta" placeholder="Buraya çalışırken not al… (kelimeler, ipuçları, cümleler)"></textarea></div>
+  <div class="dfoot">
+    <button class="pdf">⬇ PDF olarak indir</button>
+    <button class="clr">Temizle</button>
+  </div>
+</aside>
+
+<script>
+const WORDS=[
+ {en:'enrichment',tr:'zenginleşme / zenginleştirme',ex:'Environmental enrichment enhances neuroplasticity and cognitive function.'},
+ {en:'association',tr:'birlik / ilişki',ex:'A significant association was observed between sedentary behavior and mortality.'},
+ {en:'proposal',tr:'öneri / teklif',ex:'The proposal to integrate telemedicine was endorsed by the advisory board.'},
+ {en:'prevalence',tr:'yaygınlık, sıklık',ex:'The prevalence of diabetes has risen sharply worldwide.'},
+ {en:'adverse',tr:'olumsuz, ters',ex:'The drug was withdrawn due to severe adverse effects.'},
+ {en:'susceptible',tr:'duyarlı, yatkın',ex:'Elderly patients are more susceptible to infections.'},
+ {en:'adherence',tr:'bağlılık, uyum',ex:'Treatment adherence is crucial for chronic disease control.'},
+ {en:'impairment',tr:'bozulma, yetersizlik',ex:'Renal impairment alters drug clearance significantly.'},
+ {en:'acquisition',tr:'edinim, kazanım',ex:'The acquisition of resistance genes poses a serious threat.'},
+];
+function star(){return '<span class="star" onclick="event.stopPropagation();this.classList.toggle(\'on\');this.textContent=this.classList.contains(\'on\')?\'★\':\'☆\'">☆</span>';}
+document.getElementById('list').innerHTML = WORDS.map(w=>`
+  <div class="card"><div class="top"><div class="en">${w.en}</div>${star()}</div>
+    <div class="tr">${w.tr}</div><div class="ex">${w.ex}</div></div>
+  <div class="row"><div class="en">${w.en}</div><div class="tr">${w.tr}</div>${star()}</div>
+`).join('');
+function setView(v){document.getElementById('list').className=v;
+  document.getElementById('bGrid').classList.toggle('on',v==='grid');
+  document.getElementById('bList').classList.toggle('on',v==='list');}
+function openNotes(){document.getElementById('drawer').classList.add('open');document.getElementById('scrim').classList.add('open');}
+function closeNotes(){document.getElementById('drawer').classList.remove('open');document.getElementById('scrim').classList.remove('open');}
+const ta=document.getElementById('ta');
+ta.value=localStorage.getItem('ckn')||'enrichment → zenginleştirme (florür örneği)\nadverse = olumsuz, çok çıkıyor!';
+const upd=()=>{document.getElementById('wc').textContent=(ta.value.trim()?ta.value.trim().split(/\s+/).length:0)+' kelime';localStorage.setItem('ckn',ta.value);};
+ta.addEventListener('input',upd);upd();
+</script>
+</body>
+</html>
